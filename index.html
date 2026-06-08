@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Complete field guide for fly fishing and hiking in Pagosa Springs, CO. 13 fishing spots, 12 hiking trails — searchable and filterable." />
   <title>Pagosa Springs Field Guide</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --stone:     #1a1712;
-      --earth:     #0f0e0b;
-      --dawn:      #b89040;
-      --dust:      #f0ead6;
-      --cream:     #f8f3e8;
-      --parchment: #ede4cc;
-      --muted:     #7a7260;
-      --linen:     #e4ddd0;
-      /* fishing portal */
-      --fish-dark: #1a2015;
-      --fish-blue: #7fb3c0;
-      --fish-gold: #c9a84c;
-      /* hiking portal */
-      --hike-dark: #111a0d;
-      --hike-grn:  #8fbc4a;
-      --hike-lich: #c4a24a;
+      --dark:    #0f0d0a;
+      --stone:   #1a1712;
+      --muted:   #6a6050;
+      --linen:   #e0d8c0;
+      --cream:   #f4edd8;
+      --parch:   #ede4cc;
+      --dust:    #f0ead6;
+      --gold:    #c4a24a;
+      --fish:    #4a7c8a;
+      --fish-lt: #7fb3c0;
+      --hike:    #4a7a28;
+      --hike-lt: #8fbc4a;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -33,592 +30,941 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     .site-nav {
-      position: absolute; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 3rem; height: 52px;
+      position: absolute; top:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0 2.5rem; height: 48px;
     }
     .nav-brand {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(240,234,214,0.5); text-decoration: none;
+      font-family:'DM Mono',monospace; font-size:0.62rem;
+      letter-spacing:0.22em; text-transform:uppercase;
+      color:rgba(240,234,214,0.4); text-decoration:none;
     }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-link {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(240,234,214,0.4); text-decoration: none;
-      transition: color 0.2s;
+    .nav-meta {
+      font-family:'DM Mono',monospace; font-size:0.58rem;
+      letter-spacing:0.1em; color:rgba(240,234,214,0.25);
     }
-    .nav-link:hover { color: rgba(240,234,214,0.85); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: flex-start;
-      padding: 6rem 3rem 4rem;
-      overflow: hidden;
-      background: var(--earth);
+      position:relative; min-height:50vh;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding: 6rem 2.5rem 3rem; overflow:hidden;
+      background: var(--dark);
     }
     .hero-bg {
-      position: absolute; inset: 0;
+      position:absolute; inset:0;
       background:
-        radial-gradient(ellipse 90% 50% at 50% 70%, rgba(74,60,28,0.35) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(184,144,64,0.08) 0%, transparent 60%),
-        linear-gradient(180deg, #060605 0%, #0e0d09 50%, #141208 100%);
+        radial-gradient(ellipse 70% 60% at 25% 65%, rgba(74,124,138,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 78% 35%, rgba(74,122,40,0.15) 0%, transparent 55%),
+        linear-gradient(170deg, #040403 0%, #0e0c09 55%, #12100a 100%);
     }
-
-    /* Stars */
-    .stars-svg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      pointer-events: none;
-    }
-
-    /* Mountain silhouette layers */
-    .mountains-svg {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      width: 100%; pointer-events: none;
-    }
-
-    /* Dawn horizon line */
-    .dawn-line {
-      position: absolute;
-      width: 100%; height: 2px;
-      background: linear-gradient(to right, transparent 0%, rgba(184,144,64,0.3) 20%, rgba(184,144,64,0.5) 50%, rgba(184,144,64,0.3) 80%, transparent 100%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative; z-index: 2;
-      max-width: 700px;
-    }
+    .hero-stars { position:absolute; inset:0; pointer-events:none; }
+    .hero-content { position:relative; z-index:2; max-width:780px; }
     .hero-eyebrow {
-      font-family: 'DM Mono', monospace; font-size: 0.68rem;
-      letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--dawn); margin-bottom: 1.5rem;
-      opacity: 0; animation: fade-up 0.8s 0.2s forwards;
+      font-family:'DM Mono',monospace; font-size:0.65rem;
+      letter-spacing:0.3em; text-transform:uppercase; color:var(--gold);
+      margin-bottom:1rem;
+      opacity:0; animation:fade-up 0.7s 0.2s forwards;
     }
     .hero-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 700;
-      line-height: 0.95; color: var(--dust);
-      opacity: 0; animation: fade-up 0.8s 0.4s forwards;
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.6rem,7vw,5.2rem); font-weight:700;
+      line-height:1.0; color:var(--dust);
+      opacity:0; animation:fade-up 0.7s 0.35s forwards;
     }
-    .hero-title em { font-style: italic; color: var(--dawn); display: block; }
+    .hero-title em { font-style:italic; color:var(--gold); }
     .hero-tagline {
-      font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem;
-      color: rgba(240,234,214,0.55); margin-top: 1.8rem; max-width: 480px;
-      opacity: 0; animation: fade-up 0.8s 0.6s forwards;
+      font-family:'Playfair Display',serif; font-style:italic;
+      font-size:1rem; color:rgba(240,234,214,0.42);
+      margin-top:0.7rem; max-width:460px;
+      opacity:0; animation:fade-up 0.7s 0.5s forwards;
     }
-    .hero-meta {
-      display: flex; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap;
-      opacity: 0; animation: fade-up 0.8s 0.8s forwards;
+    .search-wrap {
+      position:relative; margin-top:1.6rem; max-width:560px;
+      opacity:0; animation:fade-up 0.7s 0.65s forwards;
     }
-    .hero-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
-    .hero-meta-label {
-      font-family: 'DM Mono', monospace; font-size: 0.58rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(184,144,64,0.6);
+    .search-icon {
+      position:absolute; left:0.9rem; top:50%; transform:translateY(-50%);
+      color:rgba(196,162,74,0.45); pointer-events:none;
     }
-    .hero-meta-value { font-size: 0.85rem; color: var(--dust); }
-
-    /* Scroll cue */
-    .scroll-cue {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      opacity: 0; animation: fade-up 1s 1.4s forwards;
+    #search {
+      width:100%; padding:0.8rem 2.8rem 0.8rem 2.6rem;
+      background:rgba(255,255,255,0.06); border:1px solid rgba(196,162,74,0.22);
+      color:var(--dust); font-family:'DM Mono',monospace; font-size:0.8rem;
+      letter-spacing:0.04em; outline:none; border-radius:2px;
+      transition:border-color 0.2s, background 0.2s;
     }
-    .scroll-label {
-      font-family: 'DM Mono', monospace; font-size: 0.55rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(184,144,64,0.4);
+    #search::placeholder { color:rgba(240,234,214,0.28); }
+    #search:focus { border-color:rgba(196,162,74,0.55); background:rgba(255,255,255,0.09); }
+    #searchClear {
+      position:absolute; right:0.7rem; top:50%; transform:translateY(-50%);
+      background:none; border:none; color:rgba(240,234,214,0.35);
+      cursor:pointer; font-size:1.1rem; line-height:1; padding:0.2rem 0.3rem;
+      display:none;
     }
-    .scroll-arrow {
-      animation: bounce 2s ease-in-out infinite;
-      color: rgba(184,144,64,0.4);
-      font-size: 1.2rem; line-height: 1;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(6px); }
-    }
+    #searchClear:hover { color:var(--dust); }
+    #searchClear.on { display:block; }
     @keyframes fade-up {
-      from { opacity:0; transform:translateY(20px); }
+      from { opacity:0; transform:translateY(14px); }
       to   { opacity:1; transform:translateY(0); }
     }
 
-    /* ── ACTIVITY PORTALS ── */
-    .portals-section {
-      padding: 5rem 3rem;
-      max-width: 1100px; margin: 0 auto;
+    /* CONTROLS */
+    .controls-wrap {
+      position:sticky; top:0; z-index:50;
+      background:rgba(14,12,9,0.97); backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(196,162,74,0.1);
     }
-    .portals-intro {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      margin-bottom: 3rem;
+    .controls {
+      display:flex; align-items:flex-start; gap:1.2rem; flex-wrap:wrap;
+      padding:0.7rem 2.5rem 0;
     }
-    .portals-label {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+    .fg { display:flex; flex-direction:column; gap:0.35rem; }
+    .fl {
+      font-family:'DM Mono',monospace; font-size:0.5rem;
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(196,162,74,0.45);
     }
-    .portals-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
-      color: var(--stone); line-height: 1.2;
+    .pills { display:flex; gap:0.3rem; flex-wrap:wrap; }
+    .pill {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.08em; text-transform:uppercase;
+      padding:0.2rem 0.6rem; border:1px solid rgba(255,255,255,0.1);
+      border-radius:2px; background:transparent;
+      color:rgba(240,234,214,0.38); cursor:pointer;
+      transition:all 0.15s; white-space:nowrap;
     }
-    .portals-sub {
-      font-style: italic; color: var(--muted); max-width: 540px;
-      font-size: 0.95rem; margin-top: 0.3rem;
+    .pill:hover:not(.active) { border-color:rgba(255,255,255,0.28); color:rgba(240,234,214,0.75); }
+    .pill.active { color:#0f0d0a; border-color:transparent; background:var(--gold); }
+    [data-filter="type"].pill.active[data-val="fishing"] { background:var(--fish-lt); }
+    [data-filter="type"].pill.active[data-val="hiking"]  { background:var(--hike-lt); }
+    [data-filter="difficulty"].pill.active[data-val="easy"]      { background:#5aaa38; color:#fff; }
+    [data-filter="difficulty"].pill.active[data-val="moderate"]  { background:#c4a24a; color:#1a1712; }
+    [data-filter="difficulty"].pill.active[data-val="strenuous"] { background:#c06030; color:#fff; }
+    [data-filter="difficulty"].pill.active[data-val="expert"]    { background:#c02010; color:#fff; }
+
+    .fg--toggle {
+      flex-direction:row; align-items:flex-end; padding-bottom:0.48rem;
+      margin-left:auto;
+    }
+    .tog-label {
+      display:flex; align-items:center; gap:0.45rem;
+      cursor:pointer; user-select:none;
+    }
+    .tog-label input { display:none; }
+    .tog-sw {
+      width:26px; height:15px; border-radius:8px;
+      background:rgba(255,255,255,0.1); position:relative;
+      transition:background 0.2s; flex-shrink:0;
+    }
+    .tog-sw::after {
+      content:''; position:absolute;
+      width:11px; height:11px; border-radius:50%;
+      background:rgba(240,234,214,0.45); top:2px; left:2px;
+      transition:transform 0.2s, background 0.2s;
+    }
+    .tog-label input:checked + .tog-sw { background:var(--gold); }
+    .tog-label input:checked + .tog-sw::after { transform:translateX(11px); background:#0f0d0a; }
+    .tog-text {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:rgba(240,234,214,0.38);
     }
 
-    /* Cross-ref callout */
-    .xref-callout {
-      background: var(--parchment); border-left: 3px solid var(--dawn);
-      padding: 1rem 1.5rem; margin-bottom: 2.5rem;
-      display: flex; align-items: flex-start; gap: 1rem;
+    .ctrl-meta {
+      display:flex; align-items:center; gap:1.2rem;
+      padding:0.4rem 2.5rem 0.55rem;
+      border-top:1px solid rgba(255,255,255,0.04); margin-top:0.45rem;
     }
-    .xref-icon {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      color: var(--dawn); white-space: nowrap; padding-top: 0.15rem;
-      letter-spacing: 0.1em;
+    #count {
+      font-family:'DM Mono',monospace; font-size:0.58rem;
+      letter-spacing:0.1em; color:rgba(240,234,214,0.3);
     }
-    .xref-text {
-      font-size: 0.84rem; color: #5a5040; line-height: 1.65;
+    .sort-row { display:flex; align-items:center; gap:0.45rem; margin-left:auto; }
+    .sort-row label {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.1em; text-transform:uppercase;
+      color:rgba(240,234,214,0.28);
     }
-    .xref-text strong { color: var(--stone); }
+    #sortSel {
+      background:transparent; border:1px solid rgba(255,255,255,0.1);
+      color:rgba(240,234,214,0.45); padding:0.18rem 0.45rem;
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.05em; cursor:pointer; border-radius:2px;
+    }
+    #sortSel option { background:#1a1712; color:var(--dust); }
+    .clear-btn {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.1em; text-transform:uppercase;
+      background:none; border:1px solid rgba(196,162,74,0.28);
+      color:rgba(196,162,74,0.6); padding:0.18rem 0.65rem;
+      cursor:pointer; border-radius:2px; transition:all 0.15s;
+    }
+    .clear-btn:hover { border-color:var(--gold); color:var(--gold); }
 
-    /* Portal cards grid */
-    .portals-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 3px;
-    }
-
-    /* Base portal card */
-    .portal-card {
-      position: relative; overflow: hidden;
-      min-height: 520px;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 2.5rem;
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-    .portal-card:hover { transform: translateY(-4px); }
-    .portal-card:hover .portal-arrow { transform: translateX(6px); }
-
-    /* Fishing portal */
-    .portal-fishing {
-      background: var(--fish-dark);
-    }
-    .portal-fishing .portal-bg {
-      background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(74,124,138,0.22) 0%, transparent 70%),
-        linear-gradient(160deg, #0e1109 0%, #1a2015 40%, #1e2c2e 100%);
-    }
-    .portal-fishing .portal-eyebrow { color: var(--fish-blue); }
-    .portal-fishing .portal-title em { color: var(--fish-blue); }
-    .portal-fishing .portal-tag { border-color: rgba(127,179,192,0.35); color: var(--fish-blue); }
-    .portal-fishing .portal-arrow { color: var(--fish-blue); }
-    .portal-fishing .portal-cta {
-      background: var(--fish-blue); color: var(--fish-dark);
-    }
-    .portal-fishing .portal-cta:hover { background: #f2ead8; }
-
-    /* Hiking portal */
-    .portal-hiking {
-      background: var(--hike-dark);
-    }
-    .portal-hiking .portal-bg {
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 30%, rgba(60,100,20,0.28) 0%, transparent 65%),
-        linear-gradient(170deg, #060a04 0%, #111a0d 50%, #0d1a08 100%);
-    }
-    .portal-hiking .portal-eyebrow { color: var(--hike-grn); }
-    .portal-hiking .portal-title em { color: var(--hike-grn); }
-    .portal-hiking .portal-tag { border-color: rgba(143,188,74,0.35); color: var(--hike-grn); }
-    .portal-hiking .portal-arrow { color: var(--hike-grn); }
-    .portal-hiking .portal-cta {
-      background: var(--hike-grn); color: var(--hike-dark);
-    }
-    .portal-hiking .portal-cta:hover { background: #eee8d4; }
-
-    /* Coming soon portal */
-    .portal-soon {
-      background: #0f0e0b;
-      border: 1px dashed rgba(184,144,64,0.2);
-      cursor: default;
-    }
-    .portal-soon:hover { transform: none; }
-    .portal-soon .portal-bg {
-      background: linear-gradient(160deg, #0a0909 0%, #110f0a 100%);
+    /* GRID */
+    main { padding:2px; }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+      gap:2px;
     }
 
-    /* Portal internals */
-    .portal-bg {
-      position: absolute; inset: 0;
-      pointer-events: none;
+    /* CARDS */
+    .card {
+      background:var(--parch);
+      border-left:3px solid var(--bc, var(--fish));
+      padding:1.35rem 1.45rem;
+      display:flex; flex-direction:column; gap:0.6rem;
+      transition:transform 0.2s, box-shadow 0.2s;
+      scroll-margin-top:130px;
     }
-    .portal-ambient-svg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      pointer-events: none; opacity: 1;
+    .card:hover {
+      transform:translateX(3px);
+      box-shadow:-3px 0 0 var(--bc, var(--fish)), 3px 6px 16px rgba(0,0,0,0.07);
     }
-    .portal-content {
-      position: relative; z-index: 2;
-    }
-    .portal-eyebrow {
-      font-family: 'DM Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      margin-bottom: 1.2rem;
-    }
-    .portal-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
-      line-height: 1.05; color: #f0ead6;
-      margin-bottom: 1rem;
-    }
-    .portal-desc {
-      font-family: 'Libre Baskerville', serif; font-style: italic;
-      font-size: 0.84rem; color: rgba(240,234,214,0.55);
-      line-height: 1.7; max-width: 320px; margin-bottom: 1.5rem;
-    }
-    .portal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .portal-tag {
-      font-family: 'DM Mono', monospace; font-size: 0.55rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.2rem 0.55rem; border: 1px solid; border-radius: 2px;
-    }
-    .portal-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.2rem;
-    }
-    .portal-cta {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.55rem 1.3rem; text-decoration: none; font-weight: 500;
-      transition: background 0.2s;
-    }
-    .portal-arrow {
-      font-size: 1.2rem; line-height: 1;
-      transition: transform 0.2s;
-    }
-    .portal-count {
-      font-family: 'DM Mono', monospace; font-size: 0.58rem;
-      letter-spacing: 0.1em; color: rgba(240,234,214,0.25);
+    .card.flash { animation:cflash 1.4s ease-out; }
+    @keyframes cflash {
+      0%,100% { background:var(--parch); }
+      18%     { background:rgba(196,162,74,0.22); }
     }
 
-    /* Soon card internals */
-    .soon-content {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; height: 100%;
-      text-align: center; padding: 2rem;
+    .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:0.4rem; }
+    .act-tags { display:flex; gap:0.28rem; flex-wrap:wrap; margin-bottom:0.3rem; }
+    .act-tag {
+      display:inline-flex; align-items:center; gap:0.22rem;
+      font-family:'DM Mono',monospace; font-size:0.5rem;
+      letter-spacing:0.08em; text-transform:uppercase;
+      padding:0.15rem 0.45rem; border-radius:2px; font-weight:500;
     }
-    .soon-icon {
-      font-size: 2rem; margin-bottom: 1.2rem; opacity: 0.3;
+    .act-tag-fishing { background:rgba(74,124,138,0.1); color:#4a7c8a; border:1px solid rgba(74,124,138,0.28); }
+    .act-tag-hiking  { background:rgba(74,122,40,0.1);  color:#4a7a28; border:1px solid rgba(74,122,40,0.28); }
+    .card-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--stone); line-height:1.2; }
+    .card-sub  { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.07em; color:var(--muted); margin-top:0.12rem; }
+
+    .card-desc { font-size:0.8rem; color:#4a4030; line-height:1.65; }
+
+    .card-tags { display:flex; flex-wrap:wrap; gap:0.28rem; }
+    .tag {
+      font-family:'DM Mono',monospace; font-size:0.5rem;
+      letter-spacing:0.07em; text-transform:uppercase;
+      padding:0.13rem 0.42rem; border:1px solid rgba(106,96,80,0.28);
+      border-radius:2px; color:var(--muted);
     }
-    .soon-label {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(184,144,64,0.4); margin-bottom: 0.6rem;
-    }
-    .soon-title {
-      font-family: 'Playfair Display', serif; font-size: 1.3rem;
-      font-weight: 700; color: rgba(240,234,214,0.3); margin-bottom: 0.8rem;
-    }
-    .soon-list {
-      font-family: 'DM Mono', monospace; font-size: 0.62rem;
-      color: rgba(184,144,64,0.3); letter-spacing: 0.05em;
-      line-height: 2;
+    .tag-d {
+      border-color:var(--dc, #4a7a28);
+      color:var(--dc, #4a7a28);
     }
 
-    /* ── HOW TO USE ── */
-    .how-section {
-      background: var(--parchment); padding: 5rem 3rem;
+    .card-park {
+      display:flex; align-items:flex-start; gap:0.45rem;
+      font-family:'DM Mono',monospace; font-size:0.62rem;
+      letter-spacing:0.03em; color:var(--muted);
+      border-top:1px solid rgba(106,96,80,0.14); padding-top:0.55rem;
     }
-    .how-inner { max-width: 960px; margin: 0 auto; }
-    .how-label {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-    .how-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
-      color: var(--stone); margin-bottom: 0.5rem;
-    }
-    .how-sub {
-      font-style: italic; color: var(--muted); margin-bottom: 2.5rem;
-    }
-    .how-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-    }
-    .how-card {
-      background: white; padding: 1.5rem;
-      border-top: 3px solid transparent;
-    }
-    .how-card.fishing { border-top-color: #7fb3c0; }
-    .how-card.hiking  { border-top-color: #8fbc4a; }
-    .how-card.xref    { border-top-color: var(--dawn); }
-    .how-card.family  { border-top-color: #c06030; }
-    .how-num {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;
-    }
-    .how-card-title {
-      font-family: 'Playfair Display', serif; font-size: 1rem;
-      font-weight: 700; color: var(--stone); margin-bottom: 0.5rem;
-    }
-    .how-card-desc { font-size: 0.82rem; color: #5a5040; line-height: 1.65; }
+    .park-ico { flex-shrink:0; margin-top:1px; opacity:0.55; }
 
-    /* ── FOOTER ── */
+    .card-xref {
+      display:flex; flex-wrap:wrap; gap:0.35rem;
+      padding:0.45rem 0.55rem;
+      background:rgba(196,162,74,0.06);
+      border:1px solid rgba(196,162,74,0.16); border-radius:2px;
+    }
+    .xlink {
+      display:inline-flex; align-items:center; gap:0.25rem;
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.05em; text-decoration:none;
+      padding:0 0 1px; border-bottom:1px solid transparent;
+      transition:border-color 0.15s;
+    }
+    .xlink-f { color:var(--fish); }
+    .xlink-f:hover { border-color:var(--fish); }
+    .xlink-h { color:var(--hike); }
+    .xlink-h:hover { border-color:var(--hike); }
+
+    .card-foot { margin-top:auto; }
+    .maps-btn {
+      display:inline-flex; align-items:center; gap:0.38rem;
+      font-family:'DM Mono',monospace; font-size:0.58rem;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--bc, var(--fish)); text-decoration:none;
+      border:1px solid rgba(106,96,80,0.18); padding:0.28rem 0.7rem;
+      border-radius:2px; transition:background 0.15s, border-color 0.15s;
+    }
+    .maps-btn:hover { background:rgba(0,0,0,0.04); border-color:var(--bc, var(--fish)); }
+
+    /* EMPTY */
+    .empty {
+      padding:5rem 2rem; text-align:center;
+    }
+    .empty p {
+      font-family:'Playfair Display',serif; font-style:italic;
+      font-size:1.15rem; color:var(--muted); margin-bottom:1.5rem;
+    }
+
+    /* FOOTER */
     footer {
-      border-top: 1px solid var(--linen); padding: 3rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
+      border-top:1px solid var(--linen); padding:2rem 2.5rem;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:1rem;
     }
-    .footer-brand {
-      font-family: 'Playfair Display', serif; font-size: 1.1rem;
-      font-weight: 700; color: var(--stone);
-    }
-    .footer-brand em { font-style: italic; color: var(--muted); }
     footer p {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);
     }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-link {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    .foot-links { display:flex; gap:1.5rem; }
+    .foot-link {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--muted); text-decoration:none; transition:color 0.2s;
     }
-    .footer-link:hover { color: var(--stone); }
+    .foot-link:hover { color:var(--stone); }
 
-    @media(max-width:700px) {
-      .portals-section { padding: 3rem 1.5rem; }
-      .how-section { padding: 3rem 1.5rem; }
-      .hero { padding: 5rem 1.5rem 4rem; }
-      .site-nav { padding: 0 1.5rem; }
-      footer { padding: 2rem 1.5rem; flex-direction: column; }
+    /* TABS */
+    .tab-toggle {
+      display:flex; gap:2px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:3px; padding:2px; flex-shrink:0;
+    }
+    .tab-btn {
+      font-family:'DM Mono',monospace; font-size:0.56rem;
+      letter-spacing:0.1em; text-transform:uppercase;
+      background:none; border:none;
+      color:rgba(240,234,214,0.38); padding:0.22rem 0.7rem;
+      cursor:pointer; border-radius:2px; transition:all 0.15s;
+      display:flex; align-items:center; gap:0.3rem;
+    }
+    .tab-btn.active { background:rgba(255,255,255,0.14); color:var(--dust); }
+    .tab-btn:hover:not(.active) { color:rgba(240,234,214,0.7); }
+
+    /* MAP */
+    #mapView {
+      display:none;
+      height:calc(100dvh - 118px);
+      min-height:420px;
+      position:relative;
+    }
+    /* Leaflet popup overrides */
+    .leaflet-popup-content-wrapper { border-radius:2px; padding:0; box-shadow:0 4px 20px rgba(0,0,0,0.22); }
+    .leaflet-popup-content { margin:0; }
+    .map-popup { padding:0.85rem 1.05rem; min-width:195px; max-width:240px; }
+    .mp-act { font-family:'DM Mono',monospace; font-size:0.56rem; letter-spacing:0.1em; text-transform:uppercase; color:#8a7a60; margin-bottom:0.3rem; }
+    .mp-name { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:#1a1712; line-height:1.2; margin-bottom:0.2rem; }
+    .mp-sub  { font-family:'DM Mono',monospace; font-size:0.57rem; color:#8a7a60; margin-bottom:0.4rem; line-height:1.5; }
+    .mp-park { font-family:'DM Mono',monospace; font-size:0.58rem; color:#4a4030; margin-bottom:0.55rem; line-height:1.5; }
+    .mp-link { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.05em; color:#4a7c8a; text-decoration:none; }
+    .mp-link:hover { text-decoration:underline; }
+
+    @media(max-width:640px) {
+      .hero { padding:5rem 1.5rem 2.5rem; }
+      .controls { padding:0.7rem 1.5rem 0; gap:0.8rem; }
+      .ctrl-meta { padding:0.4rem 1.5rem 0.5rem; }
+      .fg--toggle { margin-left:0; }
+      main { padding:1px; }
+      .grid { grid-template-columns:1fr; }
+      footer { padding:1.5rem; flex-direction:column; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="site-nav">
-  <a href="index.html" class="nav-brand">Pagosa Springs Guide</a>
-  <div class="nav-links">
-    <a href="fly-fishing.html" class="nav-link">Fly Fishing</a>
-    <a href="hiking.html" class="nav-link">Hiking</a>
-  </div>
+  <a href="index.html" class="nav-brand">Pagosa Springs Field Guide</a>
+  <span class="nav-meta">13 fishing · 12 hiking</span>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-bg"></div>
-
-  <!-- Stars -->
-  <svg class="stars-svg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120"  cy="80"  r="1"   fill="rgba(255,255,255,0.45)"/>
-    <circle cx="280"  cy="40"  r="0.8" fill="rgba(255,255,255,0.35)"/>
-    <circle cx="450"  cy="110" r="1.2" fill="rgba(255,255,255,0.4)"/>
-    <circle cx="620"  cy="55"  r="0.8" fill="rgba(255,255,255,0.3)"/>
-    <circle cx="780"  cy="90"  r="1"   fill="rgba(255,255,255,0.38)"/>
-    <circle cx="960"  cy="30"  r="0.9" fill="rgba(255,255,255,0.32)"/>
-    <circle cx="1100" cy="70"  r="1.1" fill="rgba(255,255,255,0.42)"/>
-    <circle cx="1320" cy="50"  r="0.8" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="200"  cy="140" r="0.7" fill="rgba(255,255,255,0.25)"/>
-    <circle cx="540"  cy="25"  r="0.6" fill="rgba(255,255,255,0.22)"/>
-    <circle cx="870"  cy="120" r="0.7" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="1200" cy="100" r="0.8" fill="rgba(255,255,255,0.3)"/>
-    <circle cx="380"  cy="165" r="0.6" fill="rgba(255,255,255,0.2)"/>
-    <circle cx="1050" cy="145" r="0.7" fill="rgba(255,255,255,0.22)"/>
-    <circle cx="690"  cy="175" r="0.5" fill="rgba(255,255,255,0.18)"/>
+  <svg class="hero-stars" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice">
+    <circle cx="120" cy="60" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="300" cy="35" r="0.8" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="480" cy="90" r="1.1" fill="rgba(255,255,255,0.38)"/><circle cx="660" cy="45" r="0.8" fill="rgba(255,255,255,0.28)"/>
+    <circle cx="840" cy="75" r="1" fill="rgba(255,255,255,0.35)"/><circle cx="1020" cy="28" r="0.9" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="1180" cy="65" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="1360" cy="42" r="0.8" fill="rgba(255,255,255,0.25)"/>
+    <circle cx="210" cy="130" r="0.7" fill="rgba(255,255,255,0.22)"/><circle cx="560" cy="22" r="0.6" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="900" cy="110" r="0.7" fill="rgba(255,255,255,0.25)"/><circle cx="1260" cy="88" r="0.8" fill="rgba(255,255,255,0.28)"/>
   </svg>
-
-  <!-- Mountain layers -->
-  <svg class="mountains-svg" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" style="height:400px;">
-    <!-- Distant range — lightest -->
-    <path d="M0,420 L0,260 L80,240 L160,255 L280,200 L380,230 L500,170 L600,195 L700,150 L800,180 L920,145 L1020,170 L1140,155 L1240,185 L1380,200 L1440,210 L1440,420 Z" fill="rgba(20,18,12,0.5)"/>
-    <!-- Mid range -->
-    <path d="M0,420 L0,300 L120,278 L240,295 L360,255 L480,272 L580,230 L680,248 L800,210 L920,235 L1060,215 L1180,240 L1320,255 L1440,265 L1440,420 Z" fill="rgba(14,13,8,0.75)"/>
-    <!-- Foreground ridge — darkest -->
-    <path d="M0,420 L0,340 L160,325 L320,338 L480,310 L640,328 L800,298 L960,315 L1120,295 L1280,320 L1440,310 L1440,420 Z" fill="rgba(10,9,6,0.92)"/>
-    <!-- Dawn glow on horizon -->
-    <rect x="0" y="298" width="1440" height="3" fill="rgba(184,144,64,0.18)"/>
-    <rect x="0" y="301" width="1440" height="8" fill="rgba(184,144,64,0.06)"/>
-  </svg>
-
   <div class="hero-content">
     <p class="hero-eyebrow">Field Guide &nbsp;·&nbsp; San Juan Mountains &nbsp;·&nbsp; Colorado</p>
-    <h1 class="hero-title">Pagosa<br><em>Springs.</em></h1>
-    <p class="hero-tagline">Find your mountain. A guide for every member of the group.</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Season</span>
-        <span class="hero-meta-value">Early June</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Activities</span>
-        <span class="hero-meta-value">Fly Fishing · Hiking · More soon</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Base Elevation</span>
-        <span class="hero-meta-value">6,900 ft · Pagosa Springs, CO</span>
-      </div>
+    <h1 class="hero-title">Pagosa <em>Springs.</em></h1>
+    <p class="hero-tagline">25 spots — fishing, hiking, or both. Search, filter, find where to park.</p>
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" id="search" placeholder="Species, trail name, canyon, waterfall…" autocomplete="off" />
+      <button id="searchClear" aria-label="Clear">×</button>
     </div>
-  </div>
-
-  <div class="scroll-cue">
-    <span class="scroll-label">Explore</span>
-    <span class="scroll-arrow">↓</span>
   </div>
 </header>
 
-<!-- ACTIVITY PORTALS -->
-<section class="portals-section">
-  <div class="portals-intro">
-    <p class="portals-label">Choose your adventure</p>
-    <h2 class="portals-title">Something for everyone in the group.</h2>
-    <p class="portals-sub">Anglers, hikers, and everyone in between — split up or converge at the same spot.</p>
-  </div>
-
-  <div class="xref-callout">
-    <span class="xref-icon">↔ Cross-ref</span>
-    <p class="xref-text">Several fishing spots and hiking trails share the same location — the Piedra River, Williams Creek, Turkey Creek, and the San Juan Riverwalk. <strong>Look for the 🥾 and 🎣 badges</strong> on each page to find spots where the group can split and reunite at the same trailhead.</p>
-  </div>
-
-  <div class="portals-grid">
-
-    <!-- FISHING PORTAL -->
-    <a href="fly-fishing.html" class="portal-card portal-fishing">
-      <div class="portal-bg"></div>
-      <!-- Ripple SVG -->
-      <svg class="portal-ambient-svg" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
-        <ellipse cx="280" cy="360" rx="60"  ry="30"  fill="none" stroke="rgba(127,179,192,0.08)" stroke-width="0.8"/>
-        <ellipse cx="280" cy="360" rx="100" ry="50"  fill="none" stroke="rgba(127,179,192,0.06)" stroke-width="0.8"/>
-        <ellipse cx="280" cy="360" rx="145" ry="72"  fill="none" stroke="rgba(127,179,192,0.04)" stroke-width="0.7"/>
-        <ellipse cx="80"  cy="420" rx="40"  ry="20"  fill="none" stroke="rgba(127,179,192,0.07)" stroke-width="0.6"/>
-        <ellipse cx="80"  cy="420" rx="75"  ry="37"  fill="none" stroke="rgba(127,179,192,0.04)" stroke-width="0.6"/>
-        <circle cx="60" cy="180" r="1.5" fill="rgba(201,168,76,0.35)"/>
-        <circle cx="100" cy="120" r="1" fill="rgba(201,168,76,0.25)"/>
-        <circle cx="320" cy="200" r="1.5" fill="rgba(201,168,76,0.3)"/>
-        <circle cx="30" cy="260" r="1" fill="rgba(201,168,76,0.2)"/>
-      </svg>
-      <div class="portal-content">
-        <p class="portal-eyebrow">Fly Fishing Field Guide</p>
-        <h2 class="portal-title">Still water.<br><em>Rising fish.</em></h2>
-        <p class="portal-desc">Thirteen wade fishing spots from in-town runs to remote canyon water — plus ten fly patterns to tie the night before.</p>
-        <div class="portal-tags">
-          <span class="portal-tag">13 spots</span>
-          <span class="portal-tag">10 fly patterns</span>
-          <span class="portal-tag">Rainbow · Brown · Cutthroat</span>
-        </div>
-        <div class="portal-footer">
-          <span class="portal-cta">Open guide</span>
-          <span class="portal-arrow">→</span>
-          <span class="portal-count">San Juan · Piedra · Blanco · East Fork</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- HIKING PORTAL -->
-    <a href="hiking.html" class="portal-card portal-hiking">
-      <div class="portal-bg"></div>
-      <!-- Topo SVG -->
-      <svg class="portal-ambient-svg" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
-        <ellipse cx="200" cy="140" rx="22" ry="12"  fill="none" stroke="rgba(143,188,74,0.16)" stroke-width="0.8"/>
-        <ellipse cx="200" cy="140" rx="50" ry="27"  fill="none" stroke="rgba(143,188,74,0.12)" stroke-width="0.8"/>
-        <ellipse cx="200" cy="140" rx="85" ry="46"  fill="none" stroke="rgba(143,188,74,0.09)" stroke-width="0.7"/>
-        <ellipse cx="200" cy="140" rx="125" ry="68" fill="none" stroke="rgba(143,188,74,0.06)" stroke-width="0.7"/>
-        <ellipse cx="200" cy="140" rx="170" ry="92" fill="none" stroke="rgba(143,188,74,0.04)" stroke-width="0.6"/>
-        <ellipse cx="200" cy="140" rx="220" ry="120" fill="none" stroke="rgba(143,188,74,0.03)" stroke-width="0.6"/>
-        <circle cx="200" cy="140" r="4" fill="rgba(143,188,74,0.4)"/>
-        <circle cx="200" cy="140" r="2" fill="#8fbc4a" opacity="0.8"/>
-        <!-- Mountain profile lines -->
-        <path d="M0,400 L80,340 L140,365 L200,295 L260,330 L340,280 L400,310 L400,520 L0,520 Z" fill="rgba(10,16,8,0.6)"/>
-        <path d="M0,430 L100,400 L200,370 L300,385 L400,360 L400,520 L0,520 Z" fill="rgba(6,10,4,0.8)"/>
-      </svg>
-      <div class="portal-content">
-        <p class="portal-eyebrow">Hiking Field Guide</p>
-        <h2 class="portal-title">High trails.<br><em>Wide sky.</em></h2>
-        <p class="portal-desc">Twelve trails from a flat riverside walk to the Continental Divide — with an interactive elevation profile for every difficulty level.</p>
-        <div class="portal-tags">
-          <span class="portal-tag">12 trails</span>
-          <span class="portal-tag">Easy → Expert</span>
-          <span class="portal-tag">6,900 → 11,800 ft</span>
-        </div>
-        <div class="portal-footer">
-          <span class="portal-cta">Open guide</span>
-          <span class="portal-arrow">→</span>
-          <span class="portal-count">Piedra · Williams Creek · Fourmile Falls · CDT</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- COMING SOON -->
-    <div class="portal-card portal-soon">
-      <div class="portal-bg"></div>
-      <div class="soon-content">
-        <div class="soon-icon">◦</div>
-        <p class="soon-label">Coming soon</p>
-        <h3 class="soon-title">More Pagosa</h3>
-        <div class="soon-list">
-          Hot springs &amp; soaking<br>
-          Dining &amp; local food<br>
-          History &amp; culture<br>
-          Kids activities<br>
-          Rafting &amp; paddling<br>
-          Mountain biking
-        </div>
+<div class="controls-wrap">
+  <div class="controls">
+    <div class="fg">
+      <span class="fl">Type</span>
+      <div class="pills">
+        <button class="pill active" data-filter="type" data-val="all">All</button>
+        <button class="pill" data-filter="type" data-val="fishing">🎣 Fishing</button>
+        <button class="pill" data-filter="type" data-val="hiking">🥾 Hiking</button>
       </div>
     </div>
-
-  </div>
-</section>
-
-<!-- HOW TO USE -->
-<section class="how-section">
-  <div class="how-inner">
-    <p class="how-label">How to use this guide</p>
-    <h2 class="how-title">Built for groups that don't all want the same thing.</h2>
-    <p class="how-sub">Send anglers to the river, hikers up the trail, and meet back at the trailhead.</p>
-    <div class="how-grid">
-      <div class="how-card fishing">
-        <p class="how-num">01</p>
-        <h3 class="how-card-title">Open the fishing guide</h3>
-        <p class="how-card-desc">Find your spot — organized by distance from town. Each card includes directions, species, access difficulty, and what flies to use. Spots with a 🥾 badge have a hiking trail at the same location.</p>
-      </div>
-      <div class="how-card hiking">
-        <p class="how-num">02</p>
-        <h3 class="how-card-title">Open the hiking guide</h3>
-        <p class="how-card-desc">Browse trails by difficulty — from the flat Riverwalk to the Continental Divide. Use the elevation profile to compare trails at a glance. Trails with a 🎣 badge share a trailhead with a fishing spot.</p>
-      </div>
-      <div class="how-card xref">
-        <p class="how-num">03</p>
-        <h3 class="how-card-title">Use the cross-references</h3>
-        <p class="how-card-desc">The 🥾 and 🎣 badges link directly between pages. Anglers at the Piedra River can point hikers to the trail at the same trailhead. Turkey Creek, Williams Creek, and the Riverwalk all work this way.</p>
-      </div>
-      <div class="how-card family">
-        <p class="how-num">04</p>
-        <h3 class="how-card-title">Family-friendly picks</h3>
-        <p class="how-card-desc">San Juan Riverwalk (flat, paved, stroller-friendly), Fourmile Falls (family moderate, spectacular waterfall), and the Piedra River family section (short canyon hike, great for ages 6+).</p>
+    <div class="fg">
+      <span class="fl">Difficulty</span>
+      <div class="pills">
+        <button class="pill active" data-filter="difficulty" data-val="all">All</button>
+        <button class="pill" data-filter="difficulty" data-val="easy">Easy</button>
+        <button class="pill" data-filter="difficulty" data-val="moderate">Moderate</button>
+        <button class="pill" data-filter="difficulty" data-val="strenuous">Strenuous</button>
+        <button class="pill" data-filter="difficulty" data-val="expert">Expert</button>
       </div>
     </div>
+    <div class="fg">
+      <span class="fl">Drive from Town</span>
+      <div class="pills">
+        <button class="pill active" data-filter="dist" data-val="all">All</button>
+        <button class="pill" data-filter="dist" data-val="in-town">In Town</button>
+        <button class="pill" data-filter="dist" data-val="close">&lt; 30 min</button>
+        <button class="pill" data-filter="dist" data-val="mid">30–45 min</button>
+        <button class="pill" data-filter="dist" data-val="far">45+ min</button>
+      </div>
+    </div>
+    <div class="fg">
+      <span class="fl">Parking</span>
+      <div class="pills">
+        <button class="pill active" data-filter="parking" data-val="all">All</button>
+        <button class="pill" data-filter="parking" data-val="lot">Lot</button>
+        <button class="pill" data-filter="parking" data-val="trailhead">Trailhead</button>
+        <button class="pill" data-filter="parking" data-val="roadside">Roadside</button>
+        <button class="pill" data-filter="parking" data-val="street">Street</button>
+      </div>
+    </div>
+    <div class="fg fg--toggle">
+      <label class="tog-label">
+        <input type="checkbox" id="sharedTog" />
+        <span class="tog-sw"></span>
+        <span class="tog-text">Shared trailheads only</span>
+      </label>
+    </div>
   </div>
-</section>
+  <div class="ctrl-meta">
+    <div class="tab-toggle">
+      <button class="tab-btn active" data-tab="list">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        List
+      </button>
+      <button class="tab-btn" data-tab="map">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        Map
+      </button>
+    </div>
+    <span id="count"></span>
+    <div class="sort-row">
+      <label for="sortSel">Sort</label>
+      <select id="sortSel">
+        <option value="distance">Distance from town</option>
+        <option value="difficulty">Difficulty</option>
+        <option value="name">Name A→Z</option>
+      </select>
+    </div>
+    <button class="clear-btn" id="clearAll" hidden>Clear filters</button>
+  </div>
+</div>
 
-<!-- FOOTER -->
+<main>
+  <div class="grid" id="grid"></div>
+  <div id="mapView"></div>
+  <div class="empty" id="empty" hidden>
+    <p>No spots match your filters.</p>
+    <button class="clear-btn" onclick="resetAll()">Clear all filters</button>
+  </div>
+</main>
+
 <footer>
-  <div class="footer-brand">Pagosa <em>Springs</em></div>
-  <div class="footer-links">
-    <a href="fly-fishing.html" class="footer-link">Fly Fishing</a>
-    <a href="hiking.html" class="footer-link">Hiking</a>
+  <p>Pagosa Springs · San Juan Mountains · Colorado · Early June · Always verify conditions locally</p>
+  <div class="foot-links">
+    <a href="fly-fishing.html" class="foot-link">Fishing detail</a>
+    <a href="hiking.html" class="foot-link">Hiking detail</a>
   </div>
-  <p>San Juan Mountains · Colorado · Early June · Always verify conditions locally</p>
 </footer>
 
+<script>
+const DATA = [
+  // ── FISHING ──────────────────────────────────────────────────────────
+  { id:'spot-01', types:['fishing','hiking'], name:'San Juan River — Town Park',
+    sub:'In town · Easy access · Stocked + wild',
+    driveMin:0, distCat:'in-town', difficulty:'easy', parking:'lot',
+    parkNote:'Town Park lot — free, paved. Same lot serves Riverwalk hike.',
+    lat:37.267486, lng:-107.008850,
+    tags:['Rainbow','Brown','Riffle · Pool','Stocked + Wild'],
+    desc:'Most accessible stretch in Pagosa. The San Juan runs right through Town Park with easy gravel bar access and good riffles. Expect smaller fish but great practice water — steps from coffee.',
+    xref:[{id:'trail-01', label:'San Juan Riverwalk'}],
+    mapsUrl:'https://maps.google.com/?q=37.267486,-107.008850', shared:true },
+
+  { id:'spot-02', types:['fishing'], name:'San Juan River — Mary Fisher Park',
+    sub:'In town · Free parking · Less foot traffic',
+    driveMin:0, distCat:'in-town', difficulty:'easy', parking:'lot',
+    parkNote:'Free lot across the river from Town Park.',
+    lat:37.266635, lng:-107.008581,
+    tags:['Rainbow','Brown','Riffle · Bank'],
+    desc:'Across from Town Park with direct bank access and less foot traffic. Shallow riffles good for sight fishing on calm mornings. Connects to the Riverwalk.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.266635,-107.008581', shared:false },
+
+  { id:'spot-03', types:['fishing'], name:'San Juan River — Yamaguchi Park',
+    sub:'In town · Quiet south end · Deeper run',
+    driveMin:0, distCat:'in-town', difficulty:'easy', parking:'lot',
+    parkNote:'Yamaguchi Park lot — free.',
+    lat:37.255403, lng:-107.011915,
+    tags:['Rainbow','Brown','Deep Run · Bank'],
+    desc:'Quiet south-end park with direct river access. Slightly deeper run along the bank. Good early morning spot before the town wakes up.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.255403,-107.011915', shared:false },
+
+  { id:'spot-04', types:['fishing'], name:'East Fork San Juan River',
+    sub:'~20 min north · FR 667 · Wild fish',
+    driveMin:20, distCat:'close', difficulty:'moderate', parking:'roadside',
+    parkNote:'Multiple roadside pullouts off FR 667 north of town.',
+    lat:37.408853, lng:-106.815450,
+    tags:['Rainbow','Cutthroat','Pocket Water · Meadow','Wild fish'],
+    desc:'Beautiful pocket water with wild rainbows and cutthroat in a forested canyon. Multiple access points off FR 667. Some sections flow through private ranch — stay on public land.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.408853,-106.815450', shared:false },
+
+  { id:'spot-05', types:['fishing','hiking'], name:'Piedra River — Lower Canyon',
+    sub:'~25 min west · CR 600 · Red-rock canyon',
+    driveMin:25, distCat:'close', difficulty:'moderate', parking:'roadside',
+    parkNote:'Multiple pullouts off CR 600 (Piedra Road) west of town.',
+    lat:37.312150, lng:-107.186400,
+    tags:['Rainbow','Brown','Canyon · Pool & Run','Wild fish'],
+    desc:'Wild rainbow and brown trout in a dramatic red-rock canyon. Multiple pullouts off Piedra Road with wade access to beautiful runs and pools. One of the most scenic stretches in the area.',
+    xref:[{id:'trail-05', label:'Piedra Family hike'},{id:'trail-08', label:'Full Piedra Trail'}],
+    mapsUrl:'https://maps.google.com/?q=37.312150,-107.186400', shared:true },
+
+  { id:'spot-06', types:['fishing','hiking'], name:'Williams Creek',
+    sub:'~30 min north · Small stream · 4-weight',
+    driveMin:30, distCat:'close', difficulty:'moderate', parking:'trailhead',
+    parkNote:'Williams Creek Trailhead — same lot for fishing and the trail to the CDT.',
+    lat:37.481000, lng:-107.081000,
+    tags:['Brook','Cutthroat','Tiger Trout','Small Stream'],
+    desc:'Small-stream fishery through national forest with brook, rainbow, cutthroat, and the rare tiger trout. Multiple access points along the forest road. Tight casting — 4-weight territory.',
+    xref:[{id:'trail-10', label:'Williams Creek Trail'},{id:'trail-11', label:'→ Continental Divide'}],
+    mapsUrl:'https://maps.google.com/?q=37.481000,-107.081000', shared:true },
+
+  { id:'spot-07', types:['fishing'], name:'Echo Canyon Reservoir SWA',
+    sub:'~20 min southeast · Hwy 84 · Easy bank',
+    driveMin:20, distCat:'close', difficulty:'easy', parking:'lot',
+    parkNote:'Dedicated lot right off Hwy 84.',
+    lat:37.218872, lng:-106.984613,
+    tags:['Rainbow','Brook','Still Water · Bank','State-stocked'],
+    desc:'State-stocked trout lake right off Hwy 84 with easy bank access and sweeping mountain views. Great for a half day. Wading the shallows at the inlet is productive.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.218872,-106.984613', shared:false },
+
+  { id:'spot-08', types:['fishing','hiking'], name:'Blanco River',
+    sub:'~35 min east · FR 656 · Crystal clear',
+    driveMin:35, distCat:'mid', difficulty:'easy', parking:'lot',
+    parkNote:'Blanco River Group Campground — park at the campground on the water.',
+    lat:37.144900, lng:-106.883300,
+    tags:['Rainbow','Brown','Freestone · Riffle','Crystal clear'],
+    desc:'Beautiful, lightly pressured freestone stream east of Pagosa. Wild trout in a forested setting. The campground sits right on the water. Reviewers rave about the river\'s clarity.',
+    xref:[{id:'trail-12', label:'Blanco Basin hike'}],
+    mapsUrl:'https://maps.google.com/?q=37.144900,-106.883300', shared:true },
+
+  { id:'spot-09', types:['fishing'], name:'Navajo River',
+    sub:'~40 min southwest · Near NM border · Remote',
+    driveMin:40, distCat:'mid', difficulty:'moderate', parking:'roadside',
+    parkNote:'Roadside pullout — verify access before heading out.',
+    lat:37.023988, lng:-107.158120,
+    tags:['Cutthroat','Rainbow','Small Stream','Remote'],
+    desc:'A smaller, remote stream southwest of Pagosa near the New Mexico border. Good wild cutthroat and rainbow in a quiet valley. Light pressure makes this a gem for those willing to explore.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.023988,-107.158120', shared:false },
+
+  { id:'spot-10', types:['fishing','hiking'], name:'Piedra River — Upper Trail',
+    sub:'~45 min northwest · Hike-in · Wild canyon',
+    driveMin:45, distCat:'far', difficulty:'strenuous', parking:'trailhead',
+    parkNote:'Piedra River Upper Trailhead — shared lot for hike-in fishing, family hike, and full Piedra Trail.',
+    lat:37.430328, lng:-107.194122,
+    tags:['Cutthroat','Brown','Canyon · Hike-in','Wild fish','River otters'],
+    desc:'The Piedra River Trail follows the upper canyon with multiple access points. Wild cutthroat in crystal-clear pools. Reviewers have spotted river otters. The deeper you hike, the less pressure.',
+    xref:[{id:'trail-05', label:'Piedra Family hike'},{id:'trail-08', label:'Full Piedra Trail'}],
+    mapsUrl:'https://maps.google.com/?q=37.430328,-107.194122', shared:true },
+
+  { id:'spot-11', types:['fishing','hiking'], name:'Turkey Creek',
+    sub:'~40 min north · Hike-in · Cutthroat',
+    driveMin:40, distCat:'mid', difficulty:'moderate', parking:'trailhead',
+    parkNote:'Turkey Creek Trailhead — shared with Turkey Creek Trail. Coords approximate.',
+    lat:37.498000, lng:-107.193000,
+    tags:['Cutthroat','Creek · Hike-in'],
+    desc:'Rewarding hike-in fishery north of Pagosa. Fish the river to the right when you cross the small creek past the cattle guard. "Worth the walk to have the beauty of nature around you."',
+    xref:[{id:'trail-07', label:'Turkey Creek Trail'}],
+    mapsUrl:'https://maps.google.com/?q=37.498000,-107.193000', shared:true },
+
+  { id:'spot-12', types:['fishing'], name:'Fish Creek',
+    sub:'~50 min east · Remote · Native cutthroat',
+    driveMin:50, distCat:'far', difficulty:'moderate', parking:'roadside',
+    parkNote:'Roadside access via forest roads east of town.',
+    lat:37.220285, lng:-106.723895,
+    tags:['Cutthroat','Small Creek · Remote','Native fish'],
+    desc:'A small, remote creek east of town via forest roads. Light pressure and native cutthroat in a pristine setting. "The drive to the trailhead is reason enough to visit." Watch for deer flies in summer.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.220285,-106.723895', shared:false },
+
+  { id:'spot-13', types:['fishing'], name:'San Juan River — Texas Hole',
+    sub:'~1.5 hrs south · New Mexico · World class',
+    driveMin:90, distCat:'far', difficulty:'easy', parking:'lot',
+    parkNote:'Large designated lot below Navajo Dam, New Mexico.',
+    lat:36.807000, lng:-107.631000,
+    tags:['Rainbow 18"+','Brown 18"+','Tailwater','World Class'],
+    desc:'The crown jewel — a world-class tailwater below Navajo Dam. Legendary 18"+ rainbows and browns stacked in the runs. Go early before it gets crowded. Some of the best catch rates of any river in the Southwest.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=36.807000,-107.631000', shared:false },
+
+  // ── HIKING ───────────────────────────────────────────────────────────
+  { id:'trail-01', types:['hiking','fishing'], name:'San Juan Riverwalk',
+    sub:'In town · Flat · Paved · Stroller-friendly',
+    driveMin:0, distCat:'in-town', difficulty:'easy', parking:'lot',
+    parkNote:'Town Park lot — same lot as San Juan Town Park fishing.',
+    lat:37.267400, lng:-107.008800,
+    tags:['2 mi','Flat','Paved path','Family','Stroller OK'],
+    desc:'A paved path along the San Juan River through downtown Pagosa. Completely flat, stroller-friendly, and dotted with benches and fishing access points. Connects Town Park, Yamaguchi, and Mary Fisher Park.',
+    xref:[{id:'spot-01', label:'Town Park fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.2674,-107.0088', shared:true },
+
+  { id:'trail-02', types:['hiking'], name:'Reservoir Hill Trail System',
+    sub:'In town · Views · Multiple loops',
+    driveMin:0, distCat:'in-town', difficulty:'easy', parking:'street',
+    parkNote:'Street parking on Hot Springs Blvd or behind the San Juan Motel.',
+    lat:37.271000, lng:-107.012000,
+    tags:['1–4 mi loops','~400 ft gain','Dirt trail','Panoramic views'],
+    desc:'A network of trails right behind town. Quick elevation gain earns panoramic views of Pagosa Peak and the San Juan Valley. Multiple loop options. Restored habitat draws migratory birds in June.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.271,-107.012', shared:false },
+
+  { id:'trail-03', types:['hiking'], name:'Coyote Hill Loop',
+    sub:'~15 min west · Mountain views · Easy loop',
+    driveMin:15, distCat:'close', difficulty:'easy', parking:'roadside',
+    parkNote:'Small pullout off Piedra Road.',
+    lat:37.285000, lng:-107.165000,
+    tags:['2.5 mi loop','~300 ft gain','Loop · Views'],
+    desc:'An accessible loop off Piedra Road with sweeping views of the San Juan Mountains and Pagosa Peak. Low elevation keeps it snow-free in early June. Can link to Leche Creek or V Rock Trail for a longer day.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.285,-107.165', shared:false },
+
+  { id:'trail-04', types:['hiking'], name:'Fourmile Falls',
+    sub:'~30 min north · Waterfall · Family moderate',
+    driveMin:30, distCat:'close', difficulty:'moderate', parking:'trailhead',
+    parkNote:'Trailhead lot — take CR 400 north ~8 mi then Fourmile Road another 5 mi.',
+    lat:37.384000, lng:-107.027000,
+    tags:['6 mi RT','~600 ft gain','Waterfall','Peak flow June','Family'],
+    desc:'One of the most rewarding moderate hikes near Pagosa. Trail through aspen and conifer leads to a spectacular double waterfall. Views of Eagle Mountain (12,007 ft) and Pagosa Peak (12,640 ft). Falls are at peak flow in early June.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.384,-107.027', shared:false },
+
+  { id:'trail-05', types:['hiking','fishing'], name:'Piedra River Trail — Family Section',
+    sub:'~45 min northwest · Canyon · River · Sandstone walls',
+    driveMin:45, distCat:'far', difficulty:'moderate', parking:'trailhead',
+    parkNote:'Piedra River Upper Trailhead — shared with fishing spots 05 and 10.',
+    lat:37.430000, lng:-107.194000,
+    tags:['3–4 mi RT','~500 ft gain','Canyon · River','Family','Sandstone walls'],
+    desc:'The upper trailhead drops into a stunning sandstone box canyon. Half a mile down: sheer walls and a great picnic spot. 1.5 miles reaches the river bend. Anglers can wade the Piedra while hikers explore the trail simultaneously.',
+    xref:[{id:'spot-05', label:'Piedra Lower Canyon'},{id:'spot-10', label:'Piedra Upper fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.430,-107.194', shared:true },
+
+  { id:'trail-06', types:['hiking'], name:'Cimarrona Creek Trail',
+    sub:'~30 min north · Creek · Forest · CDT access',
+    driveMin:30, distCat:'close', difficulty:'moderate', parking:'trailhead',
+    parkNote:'Trailhead at 8,400 ft — 4.1 mi past Cimarrona Campground on Williams Lake Rd.',
+    lat:37.480000, lng:-107.050000,
+    tags:['6.5 mi OW','~800 ft gain','Creek · Forest','CDT access'],
+    desc:'Beautiful one-way trail through conifers and aspen. Trailhead at 8,400 ft. Runs to Squaw Pass on the Continental Divide Trail for those with a shuttle. Worth going just 2–3 miles in for the creek.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.48,-107.05', shared:false },
+
+  { id:'trail-07', types:['hiking','fishing'], name:'Turkey Creek Trail',
+    sub:'~40 min north · CDT access · Strenuous',
+    driveMin:40, distCat:'mid', difficulty:'strenuous', parking:'trailhead',
+    parkNote:'Turkey Creek Trailhead — shared with Turkey Creek fishing. Coords approximate.',
+    lat:37.498000, lng:-107.193000,
+    tags:['10+ mi','~1,600 ft gain','CDT access','ATVs first 3 mi only'],
+    desc:'Begins at Jackson Mountain, runs to Piedra Pass on the CDT. ATVs allowed first 3 miles, then foot and horse only — that\'s where the trail becomes magic. Cutthroat trout in the creek for anglers who split off.',
+    xref:[{id:'spot-11', label:'Turkey Creek fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.498,-107.193', shared:true },
+
+  { id:'trail-08', types:['hiking','fishing'], name:'Full Piedra River Trail',
+    sub:'~45 min northwest · Remote canyon · 11 mi',
+    driveMin:45, distCat:'far', difficulty:'strenuous', parking:'trailhead',
+    parkNote:'Piedra River Upper Trailhead — shared with fishing spots 05 and 10.',
+    lat:37.430000, lng:-107.194000,
+    tags:['11 mi OW','~1,400 ft gain','Canyon · Remote','Shuttle required'],
+    desc:'One of the outstanding wilderness trails in the southern Rockies. 11 miles clinging to the Piedra as it carves deep box canyons. Wild cutthroat and brown in nearly every pool. Upper 3.5 miles are easy before going moderate.',
+    xref:[{id:'spot-05', label:'Piedra Lower Canyon'},{id:'spot-10', label:'Piedra Upper fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.430,-107.194', shared:true },
+
+  { id:'trail-09', types:['hiking'], name:'West Fork / Rainbow Trail',
+    sub:'~20 min northeast · Hot springs · Alpine',
+    driveMin:20, distCat:'close', difficulty:'strenuous', parking:'trailhead',
+    parkNote:'Trailhead past West Fork Campground on FS Rd 648. Serious stream crossings in early June.',
+    lat:37.390000, lng:-107.010000,
+    tags:['11.75 mi OW','~2,000 ft gain','Hot springs ~5 mi','Alpine','Stream crossings'],
+    desc:'Spectacular alpine trail northeast of Pagosa. Hot springs accessible about 5 miles up. Two stream crossings can be serious in early June runoff. Check with Forest Service for hot spring location.',
+    xref:[], mapsUrl:'https://maps.google.com/?q=37.39,-107.01', shared:false },
+
+  { id:'trail-10', types:['hiking','fishing'], name:'Williams Creek Trail (Lower)',
+    sub:'~30 min north · Creek corridor · Wilderness',
+    driveMin:30, distCat:'close', difficulty:'strenuous', parking:'trailhead',
+    parkNote:'Williams Creek Trailhead — same lot as Williams Creek fishing spot.',
+    lat:37.481000, lng:-107.081000,
+    tags:['9.6 mi to CDT','~2,200 ft gain','Creek · Wilderness'],
+    desc:'Access from end of Williams Lake Road. Going 3–5 miles in is deeply satisfying on its own. Indian Creek Trail junction at mile 2.5. The lower 4 miles overlap with Williams Creek fishing access.',
+    xref:[{id:'spot-06', label:'Williams Creek fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.481,-107.081', shared:true },
+
+  { id:'trail-11', types:['hiking','fishing'], name:'Williams Creek → Continental Divide',
+    sub:'~30 min north · Expert · 3,400 ft · 11,800 ft summit',
+    driveMin:30, distCat:'close', difficulty:'expert', parking:'trailhead',
+    parkNote:'Williams Creek Trailhead — same lot as Williams Creek fishing spot.',
+    lat:37.480000, lng:-107.080000,
+    tags:['14 mi OW','3,400 ft gain','Wilderness · CDT','Backpack or long day'],
+    desc:'Full commitment: 14 miles and 3,400 vertical feet to the Continental Divide at 11,800 ft. Views into the Weminuche Wilderness. Three steep sections, two stream crossings possibly impassable in early June. Call ranger district first.',
+    xref:[{id:'spot-06', label:'Williams Creek fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.481,-107.081', shared:true },
+
+  { id:'trail-12', types:['hiking','fishing'], name:'Blanco Basin / Castle Creek',
+    sub:'~35 min east · River · Forest · Swim spot',
+    driveMin:35, distCat:'mid', difficulty:'moderate', parking:'roadside',
+    parkNote:'Signed parking area 2 mi past Castle Creek — Hwy 84 south then Blanco Basin Rd east.',
+    lat:37.200000, lng:-106.880000,
+    tags:['Variable dist','~600 ft gain','River · Forest','Swim spot','Crystal water'],
+    desc:'The Blanco River corridor — crystal clear water that reviewers rave about. Great hike-and-swim combo in early summer. Lightly pressured. Anglers can fish the Blanco while others explore the trail.',
+    xref:[{id:'spot-08', label:'Blanco River fishing'}],
+    mapsUrl:'https://maps.google.com/?q=37.2,-106.88', shared:true },
+];
+
+// ── State ──
+let S = { type:'all', difficulty:'all', dist:'all', parking:'all', shared:false, search:'', sort:'distance' };
+let currentTab = 'list';
+
+// ── Map ──
+let mapInstance = null;
+let mapMarkers  = [];
+
+function markerColor(types) {
+  if (types.length > 1) return '#c4a24a';
+  return types[0] === 'fishing' ? '#4a7c8a' : '#4a7a28';
+}
+
+function loadLeaflet(cb) {
+  if (window.L) { cb(); return; }
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(css);
+  const js = document.createElement('script');
+  js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  js.onload = cb;
+  document.head.appendChild(js);
+}
+
+function initMap() {
+  if (mapInstance) return;
+  mapInstance = L.map('mapView');
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18,
+  }).addTo(mapInstance);
+}
+
+function renderMap(list) {
+  if (!mapInstance) return;
+  mapMarkers.forEach(m => m.remove());
+  mapMarkers = [];
+  const bounds = [];
+  list.forEach(d => {
+    const color = markerColor(d.types);
+    const actLine = d.types.map(t => `${ACTIVITY[t].icon} ${ACTIVITY[t].label}`).join(' · ');
+    const m = L.circleMarker([d.lat, d.lng], {
+      radius:9, fillColor:color, color:'#ede4cc', weight:2, fillOpacity:0.9,
+    }).bindPopup(`
+      <div class="map-popup">
+        <p class="mp-act">${actLine}</p>
+        <p class="mp-name">${d.name}</p>
+        <p class="mp-sub">${d.sub}</p>
+        <p class="mp-park">🅿 ${d.parkNote}</p>
+        <a class="mp-link" href="${d.mapsUrl}" target="_blank" rel="noopener">Directions →</a>
+      </div>`, { maxWidth:260 });
+    m.addTo(mapInstance);
+    mapMarkers.push(m);
+    bounds.push([d.lat, d.lng]);
+  });
+  if (bounds.length === 1) {
+    mapInstance.setView(bounds[0], 13);
+  } else if (bounds.length > 1) {
+    mapInstance.fitBounds(bounds, { padding:[45,45], maxZoom:13 });
+  }
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  const mapEl = document.getElementById('mapView');
+  if (tab === 'map') {
+    mapEl.style.display = 'block';
+    loadLeaflet(() => {
+      initMap();
+      mapInstance.invalidateSize();
+      renderMap(filtered());
+    });
+  } else {
+    mapEl.style.display = 'none';
+  }
+  render();
+}
+
+const DIFF_ORDER = { easy:1, moderate:2, strenuous:3, expert:4 };
+const DIFF_COLOR = { easy:'#4a7a28', moderate:'#8a6a20', strenuous:'#c06030', expert:'#c02010' };
+const ACTIVITY = {
+  fishing: { color:'#4a7c8a', icon:'🎣', label:'Fly Fishing', cls:'act-tag-fishing' },
+  hiking:  { color:'#4a7a28', icon:'🥾', label:'Hiking',      cls:'act-tag-hiking'  },
+  // add future activities here (swimming, camping, etc.)
+};
+const PARK_LABEL = { lot:'Parking Lot', trailhead:'Trailhead', roadside:'Roadside pullout', street:'Street parking' };
+
+function filtered() {
+  const q = S.search.toLowerCase().trim();
+  return DATA
+    .filter(d => {
+      if (S.type !== 'all'       && !d.types.includes(S.type))     return false;
+      if (S.difficulty !== 'all' && d.difficulty  !== S.difficulty) return false;
+      if (S.dist !== 'all'       && d.distCat     !== S.dist)       return false;
+      if (S.parking !== 'all'    && d.parking     !== S.parking)    return false;
+      if (S.shared && !d.shared) return false;
+      if (q) {
+        const hay = [d.name, d.sub, d.desc, ...d.tags, d.parkNote].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      if (S.sort === 'distance')   return a.driveMin - b.driveMin;
+      if (S.sort === 'difficulty') return DIFF_ORDER[a.difficulty] - DIFF_ORDER[b.difficulty];
+      if (S.sort === 'name')       return a.name.localeCompare(b.name);
+      return 0;
+    });
+}
+
+function card(d) {
+  const bc = d.types.length > 1 ? 'var(--gold)' : ACTIVITY[d.types[0]].color;
+  const dc = DIFF_COLOR[d.difficulty];
+  const actHtml = d.types.map(t => {
+    const a = ACTIVITY[t];
+    return `<span class="act-tag ${a.cls}">${a.icon} ${a.label}</span>`;
+  }).join('');
+  const tagHtml = d.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  const xrefHtml = d.xref.length ? `<div class="card-xref">${d.xref.map(x => {
+    const cls = x.id.startsWith('spot') ? 'xlink-f' : 'xlink-h';
+    const ico = x.id.startsWith('spot') ? '🎣' : '🥾';
+    return `<a class="xlink ${cls}" href="#${x.id}" onclick="goTo('${x.id}',event)">${ico} ${x.label} →</a>`;
+  }).join('')}</div>` : '';
+
+  return `
+<div class="card" id="${d.id}" style="--bc:${bc}">
+  <div class="card-head">
+    <div>
+      <div class="act-tags">${actHtml}</div>
+      <h2 class="card-name">${d.name}</h2>
+      <p class="card-sub">${d.sub}</p>
+    </div>
+  </div>
+  <p class="card-desc">${d.desc}</p>
+  <div class="card-tags">
+    <span class="tag tag-d" style="--dc:${dc}">${d.difficulty}</span>
+    ${tagHtml}
+  </div>
+  <div class="card-park">
+    <svg class="park-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 010 6H9"/>
+    </svg>
+    <span><strong>${PARK_LABEL[d.parking]}</strong> — ${d.parkNote}</span>
+  </div>
+  ${xrefHtml}
+  <div class="card-foot">
+    <a class="maps-btn" href="${d.mapsUrl}" target="_blank" rel="noopener">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Directions
+    </a>
+  </div>
+</div>`;
+}
+
+function render() {
+  const list = filtered();
+  const grid  = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const count = document.getElementById('count');
+  const clearBtn = document.getElementById('clearAll');
+
+  count.textContent = `${list.length} of ${DATA.length} spots`;
+
+  const isMap = currentTab === 'map';
+  grid.style.display  = isMap ? 'none' : '';
+  empty.hidden        = isMap || list.length > 0;
+
+  if (!isMap) {
+    grid.innerHTML = list.map(card).join('');
+  } else if (mapInstance) {
+    renderMap(list);
+  }
+
+  const isDefault = S.type==='all' && S.difficulty==='all' && S.dist==='all' &&
+                    S.parking==='all' && !S.shared && !S.search;
+  clearBtn.hidden = isDefault;
+}
+
+function goTo(id, e) {
+  e.preventDefault();
+  let el = document.getElementById(id);
+  if (!el) { resetAll(); requestAnimationFrame(() => { goTo(id, e); }); return; }
+  el.scrollIntoView({ behavior:'smooth', block:'center' });
+  el.classList.remove('flash');
+  void el.offsetWidth;
+  el.classList.add('flash');
+}
+
+function resetAll() {
+  S = { type:'all', difficulty:'all', dist:'all', parking:'all', shared:false, search:'', sort:'distance' };
+  document.getElementById('search').value = '';
+  document.getElementById('searchClear').classList.remove('on');
+  document.getElementById('sharedTog').checked = false;
+  document.getElementById('sortSel').value = 'distance';
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.val === 'all'));
+  render();
+}
+
+// Event wiring
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const f = pill.dataset.filter, v = pill.dataset.val;
+    S[f] = v;
+    document.querySelectorAll(`.pill[data-filter="${f}"]`).forEach(p => p.classList.toggle('active', p.dataset.val === v));
+    render();
+  });
+});
+
+let st;
+document.getElementById('search').addEventListener('input', e => {
+  clearTimeout(st);
+  st = setTimeout(() => {
+    S.search = e.target.value;
+    document.getElementById('searchClear').classList.toggle('on', !!S.search);
+    render();
+  }, 150);
+});
+
+document.getElementById('searchClear').addEventListener('click', () => {
+  document.getElementById('search').value = '';
+  S.search = '';
+  document.getElementById('searchClear').classList.remove('on');
+  render();
+});
+
+document.getElementById('sharedTog').addEventListener('change', e => { S.shared = e.target.checked; render(); });
+document.getElementById('sortSel').addEventListener('change',   e => { S.sort   = e.target.value;   render(); });
+document.getElementById('clearAll').addEventListener('click', resetAll);
+document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+render();
+</script>
 </body>
 </html>
