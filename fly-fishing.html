@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fly Fishing — Pagosa Springs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --stone: #1a1712;
+      --bark: #2c2518;
+      --moss: #3a4a2e;
+      --sage: #6b7d5a;
+      --river: #4a7c8a;
+      --water: #7fb3c0;
+      --sky: #b8d4d8;
+      --parchment: #f2ead8;
+      --cream: #faf6ec;
+      --gold: #c9a84c;
+      --rust: #a85c3a;
+      --linen: #e8dfc8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--cream);
+      color: var(--stone);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 3rem 5rem;
+      overflow: hidden;
+      background: var(--bark);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(74,124,138,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(58,74,46,0.4) 0%, transparent 60%),
+        linear-gradient(160deg, #0e1109 0%, #1a2015 35%, #1e2c2e 70%, #0f1a1c 100%);
+    }
+    .ripple {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(127,179,192,0.12);
+      animation: ripple-expand 8s ease-out infinite; pointer-events: none;
+    }
+    .ripple:nth-child(1) { width:300px;height:150px;bottom:15%;left:55%;animation-delay:0s; }
+    .ripple:nth-child(2) { width:500px;height:250px;bottom:12%;left:52%;animation-delay:2s; }
+    .ripple:nth-child(3) { width:700px;height:350px;bottom:8%;left:48%;animation-delay:4s; }
+    .ripple:nth-child(4) { width:200px;height:100px;bottom:18%;left:20%;animation-delay:1s; }
+    .ripple:nth-child(5) { width:400px;height:200px;bottom:14%;left:16%;animation-delay:3s; }
+    @keyframes ripple-expand {
+      0% { transform:scale(0.5);opacity:0.8; } 100% { transform:scale(1.5);opacity:0; }
+    }
+    .particle {
+      position:absolute; width:3px; height:3px; border-radius:50%;
+      background:rgba(201,168,76,0.5);
+      animation:float-up 12s ease-in-out infinite; pointer-events:none;
+    }
+    .particle:nth-child(6)  {left:15%;bottom:20%;animation-delay:0s;}
+    .particle:nth-child(7)  {left:28%;bottom:30%;animation-delay:2s;}
+    .particle:nth-child(8)  {left:42%;bottom:25%;animation-delay:4s;}
+    .particle:nth-child(9)  {left:58%;bottom:15%;animation-delay:1s;}
+    .particle:nth-child(10) {left:72%;bottom:35%;animation-delay:3s;}
+    .particle:nth-child(11) {left:85%;bottom:22%;animation-delay:5s;}
+    @keyframes float-up {
+      0%,100%{transform:translateY(0) translateX(0);opacity:0;}
+      10%{opacity:0.8;} 90%{opacity:0.3;}
+      100%{transform:translateY(-200px) translateX(30px);opacity:0;}
+    }
+    .hero-eyebrow {
+      font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.25em;
+      text-transform:uppercase; color:var(--water); margin-bottom:1.5rem;
+      position:relative; z-index:2; opacity:0; animation:fade-up 0.8s 0.2s forwards;
+    }
+    .hero-title {
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(3rem,8vw,7rem); font-weight:700; line-height:1.0;
+      color:var(--parchment); position:relative; z-index:2;
+      opacity:0; animation:fade-up 0.8s 0.4s forwards;
+    }
+    .hero-title em { font-style:italic; color:var(--water); }
+    .hero-sub {
+      font-family:'Libre Baskerville',serif; font-style:italic; font-size:1.1rem;
+      color:var(--sky); margin-top:1.5rem; max-width:480px;
+      position:relative; z-index:2; opacity:0; animation:fade-up 0.8s 0.6s forwards;
+    }
+    .hero-meta {
+      display:flex; gap:2rem; margin-top:3rem;
+      position:relative; z-index:2; opacity:0; animation:fade-up 0.8s 0.8s forwards;
+      flex-wrap:wrap;
+    }
+    .hero-meta-item { display:flex; flex-direction:column; gap:0.2rem; }
+    .hero-meta-label {
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      letter-spacing:0.2em; text-transform:uppercase; color:var(--sage);
+    }
+    .hero-meta-value { font-size:0.85rem; color:var(--parchment); }
+    .hero-divider {
+      position:absolute; bottom:0; left:0; right:0; height:80px;
+      background:linear-gradient(to bottom,transparent,var(--cream)); z-index:3;
+    }
+    @keyframes fade-up { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+
+    /* LAYOUT */
+    .container { max-width:960px; margin:0 auto; padding:0 2rem; }
+    section { padding:5rem 0 3rem; position:relative; }
+    .section-label {
+      font-family:'DM Mono',monospace; font-size:0.65rem;
+      letter-spacing:0.3em; text-transform:uppercase; color:var(--river);
+      margin-bottom:1rem; display:flex; align-items:center; gap:1rem;
+    }
+    .section-label::after {
+      content:''; flex:1; height:1px;
+      background:linear-gradient(to right,var(--river),transparent); max-width:80px;
+    }
+    .section-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700;
+      line-height:1.15; color:var(--bark); margin-bottom:0.5rem;
+    }
+    .section-intro {
+      font-style:italic; color:var(--sage); margin-bottom:2.5rem; max-width:620px;
+    }
+
+    /* GOOGLE MAP CTA BANNER */
+    .gmaps-banner {
+      background:var(--moss); padding:1rem 1.5rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem; border-left:4px solid var(--gold);
+    }
+    .gmaps-banner-text {
+      font-family:'DM Mono',monospace; font-size:0.72rem;
+      letter-spacing:0.05em; color:var(--parchment);
+    }
+    .gmaps-banner-text strong { color:var(--gold); }
+    .gmaps-btn-sm {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:var(--gold); color:var(--bark); text-decoration:none;
+      padding:0.5rem 1.2rem; font-family:'DM Mono',monospace;
+      font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+      white-space:nowrap; font-weight:500;
+      transition:background 0.2s;
+    }
+    .gmaps-btn-sm:hover { background:var(--parchment); }
+
+    /* ZONE HEADERS */
+    .zone-header {
+      display:flex; align-items:center; gap:1rem;
+      margin:2.5rem 0 1rem;
+    }
+    .zone-badge {
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      letter-spacing:0.15em; text-transform:uppercase;
+      padding:0.3rem 0.8rem; border-radius:2px; white-space:nowrap;
+    }
+    .zone-badge.in-town   { background:#e8f0d0; color:#3a4a2e; border:1px solid #b0c080; }
+    .zone-badge.near      { background:#d8eaf0; color:#2a5a6a; border:1px solid #90c0d0; }
+    .zone-badge.day-trip  { background:#f0e8d0; color:#6a4a20; border:1px solid #c0a060; }
+    .zone-line { flex:1; height:1px; background:var(--linen); }
+    .zone-title {
+      font-family:'Playfair Display',serif; font-size:0.9rem;
+      font-style:italic; color:var(--sage);
+    }
+
+    /* SPOT CARDS */
+    .spots-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:2px;
+    }
+    .spot-card {
+      background:var(--linen); padding:1.5rem;
+      border-left:3px solid transparent;
+      transition:border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display:flex; flex-direction:column; gap:0.6rem;
+    }
+    .spot-card:hover {
+      border-left-color:var(--river);
+      transform:translateX(3px);
+      box-shadow:-3px 0 0 var(--river), 3px 6px 18px rgba(0,0,0,0.07);
+    }
+    .spot-num {
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      letter-spacing:0.1em; color:var(--river); margin-bottom:-0.2rem;
+    }
+    .spot-name {
+      font-family:'Playfair Display',serif; font-size:1.1rem;
+      font-weight:700; color:var(--bark); line-height:1.2;
+    }
+    .spot-name a {
+      color:inherit; text-decoration:none;
+      border-bottom:1px solid rgba(74,124,138,0.4);
+      transition:color 0.2s, border-color 0.2s;
+    }
+    .spot-name a:hover { color:var(--river); border-color:var(--river); }
+    .spot-desc { font-size:0.82rem; color:#4a4030; line-height:1.6; }
+    .spot-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.2rem; }
+    .tag {
+      font-family:'DM Mono',monospace; font-size:0.55rem;
+      letter-spacing:0.08em; text-transform:uppercase;
+      padding:0.18rem 0.5rem; border:1px solid; border-radius:2px;
+    }
+    .tag-species  { border-color:var(--moss); color:var(--moss); }
+    .tag-type     { border-color:var(--river); color:var(--river); }
+    .tag-distance { border-color:#8a6a20; color:#8a6a20; background:rgba(201,168,76,0.06); }
+    .tag-access   { border-color:var(--rust); color:var(--rust); }
+    .spot-links { display:flex; flex-direction:column; gap:0.3rem; margin-top:0.4rem; }
+    .spot-link {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:'DM Mono',monospace; font-size:0.64rem;
+      letter-spacing:0.04em; color:var(--river);
+      text-decoration:none; transition:color 0.2s;
+    }
+    .spot-link:hover { color:var(--moss); }
+    .spot-link svg { flex-shrink:0; opacity:0.7; }
+
+    /* FLIES */
+    .flies-section { background:var(--bark); padding:5rem 0; }
+    .flies-section .section-label { color:var(--water); }
+    .flies-section .section-title { color:var(--parchment); }
+    .flies-section .section-intro { color:var(--sky); }
+
+    .fly-cards {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:2px;
+    }
+    .fly-card {
+      background:rgba(255,255,255,0.04);
+      border-left:3px solid transparent;
+      padding:1.4rem 1.6rem;
+      display:flex; flex-direction:column; gap:0.5rem;
+      transition:border-color 0.2s, background 0.2s;
+    }
+    .fly-card:hover {
+      border-left-color:var(--water);
+      background:rgba(255,255,255,0.07);
+    }
+    .fly-card-header {
+      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    }
+    .fly-card-num {
+      font-family:'DM Mono',monospace; font-size:0.55rem;
+      letter-spacing:0.15em; color:var(--river); flex-shrink:0;
+    }
+    .fly-card-name {
+      font-family:'Playfair Display',serif; font-size:1.05rem;
+      font-weight:700; color:var(--parchment); line-height:1.2;
+      flex:1;
+    }
+    .fly-card-badge {
+      font-family:'DM Mono',monospace; font-size:0.52rem;
+      letter-spacing:0.1em; text-transform:uppercase;
+      padding:0.2rem 0.5rem; border-radius:2px; white-space:nowrap;
+      flex-shrink:0;
+    }
+    .badge-nymph  { background:rgba(74,124,138,0.2); color:var(--water); border:1px solid rgba(74,124,138,0.4); }
+    .badge-dry    { background:rgba(201,168,76,0.15); color:#d4b060; border:1px solid rgba(201,168,76,0.3); }
+    .badge-streamer { background:rgba(168,92,58,0.2); color:#d07050; border:1px solid rgba(168,92,58,0.35); }
+    .badge-worm   { background:rgba(140,60,80,0.2); color:#e090a0; border:1px solid rgba(140,60,80,0.35); }
+
+    .fly-card-meta {
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      letter-spacing:0.05em; color:var(--sage);
+    }
+    .fly-card-desc {
+      font-size:0.8rem; color:rgba(242,234,216,0.7); line-height:1.6;
+    }
+    .fly-card-materials {
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      color:var(--sage); line-height:1.5;
+    }
+    .fly-card-materials strong { color:rgba(242,234,216,0.5); font-weight:normal; }
+    .fly-card-links {
+      display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.3rem;
+    }
+    .fly-link {
+      display:inline-flex; align-items:center; gap:0.35rem;
+      font-family:'DM Mono',monospace; font-size:0.6rem;
+      letter-spacing:0.05em; padding:0.25rem 0.6rem;
+      border:1px solid rgba(127,179,192,0.3); color:var(--water);
+      text-decoration:none; border-radius:2px;
+      transition:background 0.2s, color 0.2s;
+    }
+    .fly-link:hover { background:rgba(127,179,192,0.15); color:var(--sky); }
+    .fly-link.yt  { border-color:rgba(220,80,60,0.4); color:#e09080; }
+    .fly-link.yt:hover { background:rgba(220,80,60,0.1); }
+
+    /* MEETUPS */
+    .meetup-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:1.5rem; margin-top:1rem;
+    }
+    .meetup-card {
+      border:1px solid var(--linen); padding:1.5rem;
+      background:white; position:relative;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .meetup-card::before {
+      content:''; position:absolute; top:0; left:0;
+      width:3px; height:100%; background:var(--river);
+      transform:scaleY(0); transition:transform 0.2s; transform-origin:bottom;
+    }
+    .meetup-card:hover { border-color:var(--sky); box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+    .meetup-card:hover::before { transform:scaleY(1); }
+    .meetup-name {
+      font-family:'Playfair Display',serif; font-size:1.05rem;
+      font-weight:700; color:var(--bark); margin-bottom:0.5rem;
+    }
+    .meetup-desc { font-size:0.83rem; color:#5a5040; margin-bottom:1rem; line-height:1.6; }
+    .meetup-links { display:flex; flex-direction:column; gap:0.4rem; }
+    .meetup-link {
+      display:flex; align-items:center; gap:0.5rem;
+      font-family:'DM Mono',monospace; font-size:0.65rem;
+      color:var(--river); text-decoration:none; transition:color 0.2s;
+    }
+    .meetup-link:hover { color:var(--moss); }
+
+    /* FOOTER */
+    footer {
+      border-top:1px solid var(--linen); padding:3rem 0; text-align:center;
+    }
+    footer p {
+      font-family:'DM Mono',monospace; font-size:0.65rem;
+      letter-spacing:0.15em; color:var(--sage); text-transform:uppercase;
+    }
+
+    /* SITE NAV */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,23,18,0.94); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 44px;
+    }
+    .nav-home {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-home:hover { color: var(--parchment); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-link {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sage); text-decoration: none; transition: color 0.2s;
+      padding: 0.2rem 0; border-bottom: 1px solid transparent;
+    }
+    .nav-link:hover { color: var(--sky); }
+    .nav-link.active { color: var(--water); border-bottom-color: var(--water); }
+    .tag-xref-hike {
+      border-color: #4a6a30; color: #4a6a30;
+      background: rgba(74,106,48,0.06);
+    }
+    .spot-link.xref { color: #4a7a30; }
+    .spot-link.xref:hover { color: #2a5a1e; }
+
+    @media(max-width:600px){
+      .hero{padding:6rem 1.5rem 4rem;}
+      .container{padding:0 1.2rem;}
+      .spots-grid{grid-template-columns:1fr;}
+      .site-nav{padding:0 1.2rem;}
+      .nav-links{gap:1rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-home">Pagosa Springs Guide</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Overview</a>
+    <a href="fly-fishing.html" class="nav-link active">Fly Fishing</a>
+    <a href="hiking.html" class="nav-link">Hiking</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+  <div class="ripple"></div><div class="ripple"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <p class="hero-eyebrow">Fly Fishing Field Guide &nbsp;·&nbsp; Southwest Colorado</p>
+  <h1 class="hero-title">Pagosa<br><em>Springs</em></h1>
+  <p class="hero-sub">Thirteen wade fishing spots in the San Juan Mountains — from in-town runs to remote canyon water.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Season</span>
+      <span class="hero-meta-value">Early June</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Target Species</span>
+      <span class="hero-meta-value">Rainbow · Brown · Cutthroat · Brook</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Waters</span>
+      <span class="hero-meta-value">San Juan · Piedra · Blanco · East Fork · Turkey Creek</span>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</header>
+
+<!-- WHERE TO FISH -->
+<section>
+  <div class="container">
+    <p class="section-label">All Wade Fishing Spots</p>
+    <h2 class="section-title">Where to Fish</h2>
+    <p class="section-intro">Every publicly accessible wade fishing spot in and around Pagosa Springs — organized from in-town to day-trip distance. Always verify current water conditions and access before heading out; call a local shop first.</p>
+
+    <!-- Google Maps List Banner -->
+    <div class="gmaps-banner">
+      <div class="gmaps-banner-text">
+        <strong>All 13 spots</strong> — open the full list in Google Maps to save, navigate, or share
+      </div>
+      <a class="gmaps-btn-sm" href="https://www.google.com/maps/@37.27,-107.09,11z" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Open in Google Maps
+      </a>
+    </div>
+
+    <!-- ZONE 1: In Town -->
+    <div class="zone-header">
+      <span class="zone-badge in-town">In Town</span>
+      <div class="zone-line"></div>
+      <span class="zone-title">Within walking distance · no drive required</span>
+    </div>
+    <div class="spots-grid">
+
+      <div class="spot-card" id="spot-01">
+        <span class="spot-num">01</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJQeWU1GPbPYcRSYF-aXTlvzM" target="_blank" rel="noopener">San Juan River — Town Park</a>
+        </div>
+        <p class="spot-desc">The most accessible stretch in Pagosa. The San Juan runs right through Town Park with easy gravel bar access and good riffles. Expect smaller fish but great practice water — and you're steps from coffee. Stocked and wild fish mix here.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown</span>
+          <span class="tag tag-type">Riffle · Pool</span>
+          <span class="tag tag-distance">In Town</span>
+          <span class="tag tag-access">Easy</span>
+          <span class="tag tag-xref-hike">🥾 Riverwalk hike</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.267486,-107.008850" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-01" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: San Juan Riverwalk
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-02">
+        <span class="spot-num">02</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJZe9rxcDbPYcRzYNIFf9NNtk" target="_blank" rel="noopener">San Juan River — Mary Fisher Park</a>
+        </div>
+        <p class="spot-desc">Across the river from Town Park with direct bank access and a bit less foot traffic. Connects to the San Juan River Walk. Shallow riffles good for sight fishing on calm mornings. Free parking.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown</span>
+          <span class="tag tag-type">Riffle · Bank</span>
+          <span class="tag tag-distance">In Town</span>
+          <span class="tag tag-access">Easy</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.266635,-107.008581" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-03">
+        <span class="spot-num">03</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJL6AdGVrbPYcRZ7UszZ43VTw" target="_blank" rel="noopener">San Juan River — Yamaguchi Park</a>
+        </div>
+        <p class="spot-desc">Quiet south-end park with direct river access and a walking path. Less crowded than Town Park, with a slightly deeper run along the bank. Good early morning spot before the town wakes up.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown</span>
+          <span class="tag tag-type">Deep Run · Bank</span>
+          <span class="tag tag-distance">In Town</span>
+          <span class="tag tag-access">Easy</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.255403,-107.011915" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /in-town -->
+
+    <!-- ZONE 2: Close Drives -->
+    <div class="zone-header">
+      <span class="zone-badge near">15–45 min</span>
+      <div class="zone-line"></div>
+      <span class="zone-title">Short drives with excellent wild trout fishing</span>
+    </div>
+    <div class="spots-grid">
+
+      <div class="spot-card" id="spot-04">
+        <span class="spot-num">04</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJu41HGZTgPYcR6-qY8sScM5Y" target="_blank" rel="noopener">East Fork San Juan River</a>
+        </div>
+        <p class="spot-desc">One of the best kept secrets near Pagosa. Beautiful pocket water with wild rainbows and cutthroat in a forested canyon setting. Multiple access points off FR 667 north of town. Some sections flow through private ranch — stay on public land.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Cutthroat</span>
+          <span class="tag tag-type">Pocket Water · Meadow</span>
+          <span class="tag tag-distance">~20 min N</span>
+          <span class="tag tag-access">Moderate</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.408853,-106.815450" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-05">
+        <span class="spot-num">05</span>
+        <div class="spot-name">
+          <a href="https://maps.google.com/?q=37.312150,-107.186400" target="_blank" rel="noopener">Piedra River — Lower Canyon</a>
+        </div>
+        <p class="spot-desc">Wild rainbow and brown trout in a dramatic red-rock canyon. Access via Piedra Road (CR 600) west of town. Multiple pullouts with wade access to beautiful runs and pools. One of the most scenic stretches of water in the area.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown</span>
+          <span class="tag tag-type">Canyon · Pool &amp; Run</span>
+          <span class="tag tag-distance">~25 min W</span>
+          <span class="tag tag-access">Moderate</span>
+          <span class="tag tag-xref-hike">🥾 Piedra Trail nearby</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.312150,-107.186400" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-05" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: Piedra River Trail
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-06">
+        <span class="spot-num">06</span>
+        <div class="spot-name">
+          <a href="https://maps.google.com/?q=37.481000,-107.081000" target="_blank" rel="noopener">Williams Creek</a>
+        </div>
+        <p class="spot-desc">Feeds Williams Creek Reservoir through the national forest. A small-stream fishery with good populations of brook, rainbow, cutthroat, and the rare tiger trout. Multiple access points along the forest road. Tight casting — 4-weight territory.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Brook · Cutthroat · Tiger</span>
+          <span class="tag tag-type">Small Stream</span>
+          <span class="tag tag-distance">~30 min N</span>
+          <span class="tag tag-access">Easy–Moderate</span>
+          <span class="tag tag-xref-hike">🥾 Williams Creek Trail</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.481000,-107.081000" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-10" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: Williams Creek Trail
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-07">
+        <span class="spot-num">07</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJnWnCBADDPYcR-tSPK4lM0mM" target="_blank" rel="noopener">Echo Canyon Reservoir SWA</a>
+        </div>
+        <p class="spot-desc">State-stocked trout lake right off Hwy 84 with easy bank access and sweeping mountain views. Great for a half day. Reviewers call the fishing "fantastic." Technically still water but wading the shallows at the inlet is productive.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brook</span>
+          <span class="tag tag-type">Still Water · Bank</span>
+          <span class="tag tag-distance">~20 min SE</span>
+          <span class="tag tag-access">Easy</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.218872,-106.984613" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-08">
+        <span class="spot-num">08</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJ36Rgg1zqPYcR7n-6lU0YxBA" target="_blank" rel="noopener">Blanco River</a>
+        </div>
+        <p class="spot-desc">A beautiful, lightly pressured freestone stream east of Pagosa along FR 656. Wild rainbow and brown trout in a forested setting. The Blanco River Group Campground sits right on the water — camping and fishing in one. Reviewers rave about the river's clarity.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown</span>
+          <span class="tag tag-type">Freestone · Riffle</span>
+          <span class="tag tag-distance">~35 min E</span>
+          <span class="tag tag-access">Easy</span>
+          <span class="tag tag-xref-hike">🥾 Blanco Basin hike</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.144900,-106.883300" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-12" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: Blanco Basin / Castle Creek
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-09">
+        <span class="spot-num">09</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJVf4F3U-2PYcRD1K90Y1s_Mw" target="_blank" rel="noopener">Navajo River</a>
+        </div>
+        <p class="spot-desc">A smaller, remote stream southwest of Pagosa near the New Mexico border. Good wild cutthroat and rainbow populations in a quiet valley. Light pressure makes this a gem for those willing to explore. Check access before heading out.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Cutthroat · Rainbow</span>
+          <span class="tag tag-type">Small Stream</span>
+          <span class="tag tag-distance">~40 min SW</span>
+          <span class="tag tag-access">Moderate</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.023988,-107.158120" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /near -->
+
+    <!-- ZONE 3: Adventure Spots -->
+    <div class="zone-header">
+      <span class="zone-badge day-trip">45 min + · Hike-In</span>
+      <div class="zone-line"></div>
+      <span class="zone-title">Worth the drive — remote, uncrowded, exceptional</span>
+    </div>
+    <div class="spots-grid">
+
+      <div class="spot-card" id="spot-10">
+        <span class="spot-num">10</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJ3XWbJADbPYcR3nIer7dS5_k" target="_blank" rel="noopener">Piedra River — Upper Trail</a>
+        </div>
+        <p class="spot-desc">The Piedra River Trail follows the upper canyon for 10–15 miles with multiple river access points. Wild cutthroat and brown trout in crystal-clear pools. Reviewers have spotted river otters. The deeper you hike, the less pressure you'll find. Bring felt boots and a net.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Cutthroat · Brown</span>
+          <span class="tag tag-type">Canyon · Hike-In</span>
+          <span class="tag tag-distance">~45 min NW + hike</span>
+          <span class="tag tag-access">Strenuous</span>
+          <span class="tag tag-xref-hike">🥾 Piedra River Trail</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.430328,-107.194122" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Trailhead Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-08" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: Full Piedra River Trail
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-11">
+        <span class="spot-num">11</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJT8bWAs51PocR09f9bY-6wmg" target="_blank" rel="noopener">Turkey Creek</a>
+        </div>
+        <p class="spot-desc">A rewarding hike-in fishery north of Pagosa. Cutthroat and good trout fishing in a quiet creek setting. "Worth the walk to have the beauty of nature around you," says one local. Don't go too deep on the trail — fish the river to the right when you cross the small creek past the cattle guard.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Cutthroat · Trout</span>
+          <span class="tag tag-type">Creek · Hike-In</span>
+          <span class="tag tag-distance">~40 min N + hike</span>
+          <span class="tag tag-access">Moderate–Strenuous</span>
+          <span class="tag tag-xref-hike">🥾 Turkey Creek Trail</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://www.google.com/maps/place/?q=place_id:ChIJT8bWAs51PocR09f9bY-6wmg" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+          <a class="spot-link xref" href="hiking.html#trail-07" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hike: Turkey Creek Trail
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-12">
+        <span class="spot-num">12</span>
+        <div class="spot-name">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJd8Fb0R_uPYcRUtNRnfhQiR8" target="_blank" rel="noopener">Fish Creek</a>
+        </div>
+        <p class="spot-desc">A small, remote creek east of town accessible via forest roads. Light pressure and native cutthroat in a pristine setting. "The drive to the trailhead is reason enough to visit," per one reviewer. Watch for deer flies in summer.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Cutthroat</span>
+          <span class="tag tag-type">Small Creek · Remote</span>
+          <span class="tag tag-distance">~50 min E</span>
+          <span class="tag tag-access">Moderate</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=37.220285,-106.723895" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="spot-card" id="spot-13">
+        <span class="spot-num">13</span>
+        <div class="spot-name">
+          <a href="https://maps.google.com/?q=36.807000,-107.631000" target="_blank" rel="noopener">San Juan River — Texas Hole</a>
+        </div>
+        <p class="spot-desc">The crown jewel — a world-class tailwater below Navajo Dam, ~1.5 hrs south into New Mexico. Legendary 18"+ rainbows and browns stacked in the runs. Go early before it gets crowded. Some of the best catch rates of any river in the Southwest. Full-day float or wade.</p>
+        <div class="spot-tags">
+          <span class="tag tag-species">Rainbow · Brown 18"+</span>
+          <span class="tag tag-type">Tailwater · World Class</span>
+          <span class="tag tag-distance">~1.5 hrs S (NM)</span>
+          <span class="tag tag-access">Easy Wade</span>
+        </div>
+        <div class="spot-links">
+          <a class="spot-link" href="https://maps.google.com/?q=36.807000,-107.631000" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /day-trip -->
+
+    <!-- Full Maps List -->
+    <div style="margin-top:3rem;background:linear-gradient(135deg,var(--moss) 0%,var(--river) 100%);padding:2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--parchment);margin-bottom:0.3rem;">View All 13 Spots on Google Maps</h3>
+        <p style="font-size:0.82rem;color:var(--sky);">Save to your own list, get turn-by-turn directions, or share with your crew.</p>
+      </div>
+      <a style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--parchment);color:var(--moss);text-decoration:none;padding:0.8rem 1.8rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;transition:background 0.2s;" href="https://www.google.com/maps/@37.27,-107.09,11z" target="_blank" rel="noopener" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--parchment)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Open Google Maps
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLIES -->
+<section class="flies-section">
+  <div class="container">
+    <p class="section-label">Guide Fly Patterns · SW Colorado</p>
+    <h2 class="section-title">Flies to Tie</h2>
+    <p class="section-intro">These are the patterns local guides reach for first — quick ties with minimal materials that consistently put fish in the net on the San Juan, Piedra, East Fork, and Blanco. Each includes a link to a tying tutorial.</p>
+
+    <div class="fly-cards">
+
+      <!-- 01 San Juan Worm -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">01</span>
+          <span class="fly-card-name">San Juan Worm</span>
+          <span class="fly-card-badge badge-worm">Worm</span>
+        </div>
+        <div class="fly-card-meta">Red · Pink · Tan &nbsp;·&nbsp; #10–14 &nbsp;·&nbsp; 3 materials</div>
+        <p class="fly-card-desc">The #1 guide fly on the San Juan tailwater — period. An annelid worm imitation that fish can't resist year-round. Dead simple: hook, thread, ultra chenille. Guides tie these by the dozen the night before a float. Works on every river in this area.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Hook · Red ultra chenille · Thread</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+san+juan+worm+fly+tying" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.orvis.com/san-juan-worm.html" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Orvis Pattern
+          </a>
+        </div>
+      </div>
+
+      <!-- 02 Zebra Midge -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">02</span>
+          <span class="fly-card-name">Zebra Midge</span>
+          <span class="fly-card-badge badge-nymph">Nymph</span>
+        </div>
+        <div class="fly-card-meta">Black / Silver · Red / Silver &nbsp;·&nbsp; #18–22 &nbsp;·&nbsp; 3 materials</div>
+        <p class="fly-card-desc">The essential tailwater midge for the San Juan River. Midges make up a huge percentage of the trout's diet below Navajo Dam year-round. The Zebra Midge is a guide staple: bead, wire rib, thread body. Tie it in black/silver and red/silver — carry both.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Silver bead · Black thread · Fine silver wire</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+zebra+midge+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://midcurrent.com/fly-tying/zebra-midge/" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            MidCurrent
+          </a>
+        </div>
+      </div>
+
+      <!-- 03 RS2 -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">03</span>
+          <span class="fly-card-name">RS2</span>
+          <span class="fly-card-badge badge-nymph">Nymph / Emerger</span>
+        </div>
+        <div class="fly-card-meta">Gray · Olive · Black &nbsp;·&nbsp; #18–22 &nbsp;·&nbsp; 4 materials</div>
+        <p class="fly-card-desc">Created specifically for the San Juan River by Rim Chung in the 1970s. This midge/BWO emerger pattern is in every Southwest guide's box. Fished in the film or just below, it imitates a midge pupa or small mayfly emerger perfectly. Minimal materials, maximum fish.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Hook · Gray dubbing · Beaver or superfine · Micro fibers (tail) · Antron wing</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+RS2+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://flyfishfood.com/blogs/flies/rs2" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Fly Fish Food
+          </a>
+        </div>
+      </div>
+
+      <!-- 04 Copper John -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">04</span>
+          <span class="fly-card-name">Copper John</span>
+          <span class="fly-card-badge badge-nymph">Nymph</span>
+        </div>
+        <div class="fly-card-meta">Copper · Red · Green &nbsp;·&nbsp; #12–18 &nbsp;·&nbsp; 5 materials</div>
+        <p class="fly-card-desc">John Barr's classic attractor nymph is one of the best-selling flies in history for good reason — it sinks fast, produces flash, and triggers strikes even when nothing is hatching. Deadly on the Piedra, East Fork, and Blanco. The wire body is faster to tie than it looks.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Bead · Lead wire · Copper wire · Peacock herl · Pheasant tail · Epoxy back</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+copper+john+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.orvis.com/copper-john.html" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Orvis Pattern
+          </a>
+        </div>
+      </div>
+
+      <!-- 05 Pheasant Tail Nymph -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">05</span>
+          <span class="fly-card-name">Pheasant Tail Nymph</span>
+          <span class="fly-card-badge badge-nymph">Nymph</span>
+        </div>
+        <div class="fly-card-meta">Natural · #14–18 &nbsp;·&nbsp; 3 materials</div>
+        <p class="fly-card-desc">Frank Sawyer's 1950s classic remains one of the most effective nymphs ever tied. Imitates PMDs, baetis, and small mayfly nymphs — all of which hatch in June on every stream in this area. Bead-head version sinks faster and gets down in the Piedra's faster runs.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Copper bead · Pheasant tail fibers · Copper wire</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+pheasant+tail+nymph+bead+head+fly+tying" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.tightlinevideo.com/fly-tying-video/pheasant-tail-nymph" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Tightline Video
+          </a>
+        </div>
+      </div>
+
+      <!-- 06 Hare's Ear -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">06</span>
+          <span class="fly-card-name">Hare's Ear Nymph</span>
+          <span class="fly-card-badge badge-nymph">Nymph</span>
+        </div>
+        <div class="fly-card-meta">Natural Tan · #12–16 &nbsp;·&nbsp; 4 materials</div>
+        <p class="fly-card-desc">The "close enough" fly that imitates just about everything — caddis pupae, mayfly nymphs, small stoneflies. Guides trust it because the scruffy hare's ear dubbing breathes and moves in current. Deadly on the Blanco and Williams Creek where fish are opportunistic feeders.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Gold bead · Hare's ear dubbing · Gold wire rib · Pheasant tail wing case</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+gold+ribbed+hares+ear+nymph+fly+tying" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://flyfishfood.com/blogs/flies/hares-ear-nymph" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Fly Fish Food
+          </a>
+        </div>
+      </div>
+
+      <!-- 07 Elk Hair Caddis -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">07</span>
+          <span class="fly-card-name">Elk Hair Caddis</span>
+          <span class="fly-card-badge badge-dry">Dry</span>
+        </div>
+        <div class="fly-card-meta">Tan · Olive · #14–16 &nbsp;·&nbsp; 4 materials</div>
+        <p class="fly-card-desc">Al Troth's classic is the go-to dry for June caddis hatches across SW Colorado. Elk hair floats high and rides the riffles perfectly. The palmered hackle makes it visible and buoyant. Guides tie this pattern in bulk — it's that reliable on the Piedra and East Fork.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Elk hair wing · Brown hackle · Tan dubbing · Thread</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+elk+hair+caddis+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.orvis.com/elk-hair-caddis.html" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Orvis Pattern
+          </a>
+        </div>
+      </div>
+
+      <!-- 08 Parachute Adams -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">08</span>
+          <span class="fly-card-name">Parachute Adams</span>
+          <span class="fly-card-badge badge-dry">Dry</span>
+        </div>
+        <div class="fly-card-meta">Gray · #14–18 &nbsp;·&nbsp; 5 materials</div>
+        <p class="fly-card-desc">The most versatile dry fly ever tied. The white parachute post makes it visible at distance and in riffles, while the gray body imitates everything from PMDs to BWOs to spent caddis. Any guide who only brings one dry fly brings this one. Works on every river in this area.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Grizzly hackle · Adams gray dubbing · White calf tail post · Moose mane tail · Thread</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+parachute+adams+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.orvis.com/parachute-adams.html" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Orvis Pattern
+          </a>
+        </div>
+      </div>
+
+      <!-- 09 Stimulator -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">09</span>
+          <span class="fly-card-name">Stimulator</span>
+          <span class="fly-card-badge badge-dry">Dry</span>
+        </div>
+        <div class="fly-card-meta">Yellow / Orange &nbsp;·&nbsp; #10–14 &nbsp;·&nbsp; 5 materials</div>
+        <p class="fly-card-desc">Randall Kaufmann's attractor pattern imitates a Golden Stonefly adult — one of the most important hatches on the Piedra and East Fork in June. It also works as a hopper or general attractor when nothing obvious is hatching. The high-riding elk hair wing makes it easy to see in fast water.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Elk hair wing · Yellow/orange dubbing · Grizzly hackle (palmered) · Elk hair tail</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+stimulator+fly+tying+tutorial+kaufmann" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://flyfishfood.com/blogs/flies/stimulator" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Fly Fish Food
+          </a>
+        </div>
+      </div>
+
+      <!-- 10 Woolly Bugger -->
+      <div class="fly-card">
+        <div class="fly-card-header">
+          <span class="fly-card-num">10</span>
+          <span class="fly-card-name">Woolly Bugger</span>
+          <span class="fly-card-badge badge-streamer">Streamer</span>
+        </div>
+        <div class="fly-card-meta">Olive · Black · Brown &nbsp;·&nbsp; #6–10 &nbsp;·&nbsp; 3 materials</div>
+        <p class="fly-card-desc">The most versatile wet fly ever tied. Imitates leeches, crayfish, sculpin, or a wounded baitfish depending on how you fish it. Strip it slow through deep San Juan pools at dawn for big browns, or dead-drift it through Piedra canyon runs. Olive with a bead head is the guide standard.</p>
+        <div class="fly-card-materials"><strong>Materials:</strong> Marabou tail · Olive chenille body · Palmered saddle hackle · Gold bead (optional)</div>
+        <div class="fly-card-links">
+          <a class="fly-link yt" href="https://www.youtube.com/results?search_query=how+to+tie+woolly+bugger+fly+tying+tutorial" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            YouTube Tutorial
+          </a>
+          <a class="fly-link" href="https://www.orvis.com/woolly-bugger.html" target="_blank" rel="noopener">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Orvis Pattern
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /fly-cards -->
+  </div>
+</section>
+
+<!-- MEETUPS -->
+<section>
+  <div class="container">
+    <p class="section-label">Local Community</p>
+    <h2 class="section-title">Meetups &amp; Fly Shops</h2>
+    <p class="section-intro">Walk into a fly shop first — they'll tell you exactly what's working and who's on the water. These are the people to know in Pagosa.</p>
+    <div class="meetup-grid">
+
+      <div class="meetup-card">
+        <div class="meetup-name">Four Corners Trout Unlimited</div>
+        <p class="meetup-desc">The regional TU chapter based in Durango (~60 miles away). Active chapter with stream cleanups, fishing outings, and monthly meetings open to all.</p>
+        <div class="meetup-links">
+          <a class="meetup-link" href="https://www.tu.org/chapters/" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            Find chapter at tu.org
+          </a>
+        </div>
+      </div>
+
+      <div class="meetup-card">
+        <div class="meetup-name">Let it Fly — Fly Shop</div>
+        <p class="meetup-desc">132 Pagosa St. Open 7 days. Locally tied flies, current hatch reports, and a community hub. Many of their flies are tied locally. Ask about tying nights.</p>
+        <div class="meetup-links">
+          <a class="meetup-link" href="http://letitflypagosa.com" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            letitflypagosa.com
+          </a>
+          <a class="meetup-link" href="tel:+19702643189">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9v2.02z"/></svg>
+            (970) 264-3189
+          </a>
+          <a class="meetup-link" href="https://www.google.com/maps/place/?q=place_id:ChIJWQfTfmzbPYcRzCEebVOoW_A" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            132 Pagosa St · Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="meetup-card">
+        <div class="meetup-name">Williams Creek Angler</div>
+        <p class="meetup-desc">953 Park Ave. Open Mon–Sat. Dave and his crew will tell you exactly where to go and what's working — even if you're wading solo. Regulars gather here every morning.</p>
+        <div class="meetup-links">
+          <a class="meetup-link" href="http://www.williamscreekangler.com" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            williamscreekangler.com
+          </a>
+          <a class="meetup-link" href="tel:+19707312125">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9v2.02z"/></svg>
+            (970) 731-2125
+          </a>
+          <a class="meetup-link" href="https://www.google.com/maps/place/?q=place_id:ChIJk-eer-vaPYcRS1jqvJTfcyI" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            953 Park Ave · Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="meetup-card">
+        <div class="meetup-name">Facebook — "Pagosa Springs Fishing"</div>
+        <p class="meetup-desc">Active local group with current hatch reports, fish photos, and occasional meetups. Great for connecting with anglers already on the water before you arrive.</p>
+        <div class="meetup-links">
+          <a class="meetup-link" href="https://www.facebook.com/groups/search/results/?q=pagosa+springs+fishing" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Search on Facebook
+          </a>
+          <a class="meetup-link" href="https://www.meetup.com/find/?keywords=fly+fishing&location=Pagosa+Springs%2C+CO" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            Search Meetup.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Pagosa Springs · San Juan Mountains · Colorado &nbsp;·&nbsp; Early June Conditions &nbsp;·&nbsp; Always verify access and water conditions locally</p>
+  </div>
+</footer>
+
+</body>
+</html>
